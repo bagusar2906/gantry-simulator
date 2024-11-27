@@ -1,17 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class GripperDemoManualInput : MonoBehaviour
+public class GripperYManualInput : MonoBehaviour
 {
     public GameObject hand;
 
 
     void Update()
     {
-        float input = Input.GetAxis("BigHandVertical");
-        BigHandState moveState = MoveStateForInput(input);
-        GripperDemoController controller = hand.GetComponent<GripperDemoController>();
+        float input = Input.GetAxis("Vertical");
+        var moveState = MoveStateForInput(input);
+        var controller = hand.GetComponent<GripperYController>();
         controller.moveState = moveState;
     }
 

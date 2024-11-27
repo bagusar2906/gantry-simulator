@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public enum BigHandState { Fixed = 0, MovingUp = 1, MovingDown = -1 };
+public enum BigHandState { Fixed = 0, MovingUp = -1, MovingDown = 1 };
 
-public class GripperDemoController : MonoBehaviour
+public class GripperYController : MonoBehaviour
 {
 
     public BigHandState moveState = BigHandState.Fixed;
@@ -17,11 +15,11 @@ public class GripperDemoController : MonoBehaviour
             ArticulationBody articulation = GetComponent<ArticulationBody>();
 
             //get jointPosition along y axis
-            float xDrivePostion = articulation.jointPosition[0];
-            Debug.Log(xDrivePostion);
+            float xDrivePosition = articulation.jointPosition[0];
+            Debug.Log(xDrivePosition);
 
             //increment this y position
-            float targetPosition = xDrivePostion + -(float)moveState * Time.fixedDeltaTime * speed;
+            float targetPosition = xDrivePosition + -(float)moveState * Time.fixedDeltaTime * speed;
 
             //set joint Drive to new position
             var drive = articulation.xDrive;
