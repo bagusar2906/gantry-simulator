@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GripperYManualInput : MonoBehaviour
+public class ManualInputStation : MonoBehaviour
 {
     public GameObject hand;
 
@@ -9,7 +9,7 @@ public class GripperYManualInput : MonoBehaviour
     {
         float input = Input.GetAxis("Vertical");
         var moveState = MoveStateForInput(input);
-        var controller = hand.GetComponent<GripperYController>();
+        var controller = hand.GetComponent<LVMotorController>();
         controller.moveState = moveState;
     }
 

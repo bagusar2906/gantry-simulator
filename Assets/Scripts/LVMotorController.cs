@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
 
-public class GripperYController : MonoBehaviour
+public class LVMotorController : MonoBehaviour
 {
-
     public MotorState moveState = MotorState.Fixed;
     public float speed = 1.0f;
-
     private void FixedUpdate()
     {
         if (moveState != MotorState.Fixed)
@@ -13,11 +11,11 @@ public class GripperYController : MonoBehaviour
             ArticulationBody articulation = GetComponent<ArticulationBody>();
 
             //get jointPosition along y axis
-            float xDrivePosition = articulation.jointPosition[0];
-            Debug.Log(xDrivePosition);
+            float drivePosition = articulation.jointPosition[0];
+            Debug.Log(drivePosition);
 
             //increment this y position
-            float targetPosition = xDrivePosition + -(float)moveState * Time.fixedDeltaTime * speed;
+            var targetPosition = drivePosition + -(float)moveState * Time.fixedDeltaTime * speed;
 
             //set joint Drive to new position
             var drive = articulation.yDrive;
