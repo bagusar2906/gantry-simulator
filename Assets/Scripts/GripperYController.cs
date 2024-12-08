@@ -22,9 +22,9 @@ public class GripperYController : MonoBehaviour
             float targetPosition = xDrivePosition + -(float)moveState * Time.fixedDeltaTime * speed;
 
             //set joint Drive to new position
-            var drive = articulation.xDrive;
+            var drive = articulation.yDrive;
             drive.target = targetPosition;
-            articulation.xDrive = drive;
+            articulation.yDrive = drive;
         }
     }
 }
