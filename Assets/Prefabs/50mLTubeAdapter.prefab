@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 6038380894616683615}
   m_Layer: 0
   m_Name: 50mLTubeAdapter
-  m_TagString: Untagged
+  m_TagString: Selectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
