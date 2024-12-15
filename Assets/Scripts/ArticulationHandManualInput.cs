@@ -7,8 +7,8 @@ public class ArticulationHandManualInput : MonoBehaviour
     void Update()
     {
         // manual input
-        float input = Input.GetAxis("Fingers");
-        PincherController pincherController = hand.GetComponent<PincherController>();
+        float input = Input.GetAxis("Grippers");
+        var pincherController = hand.GetComponent<PincherController>();
         pincherController.gripState = GripStateForInput(input);
     }
 

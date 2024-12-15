@@ -8,7 +8,7 @@ public class PincherController : MonoBehaviour
     public GameObject fingerB;
 
     PincherFingerController fingerAController;
-    PincherFingerController fingerBController;
+       PincherFingerController fingerBController;
 
     // Grip - the extent to which the pincher is closed. 0: fully open, 1: fully closed.
     public float grip;

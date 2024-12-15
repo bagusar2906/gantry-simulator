@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 8706494204697416553}
   - component: {fileID: 8375498335863651074}
   - component: {fileID: 1495589751499238034}
+  - component: {fileID: 6039940042894626452}
+  - component: {fileID: 5778571666053559642}
   m_Layer: 0
   m_Name: Fix
   m_TagString: Untagged
@@ -138,6 +140,85 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6039940042894626452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295781715269163144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab84d1d2d3b14578b46a0115d228223a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  closedZ: 0
+--- !u!171741748 &5778571666053559642
+ArticulationBody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295781715269163144}
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Mass: 1
+  m_ParentAnchorPosition: {x: -1.3029261, y: 0.19610211, z: -0.053886905}
+  m_ParentAnchorRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_AnchorPosition: {x: 0, y: 0, z: 0}
+  m_AnchorRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_MatchAnchors: 1
+  m_ArticulationJointType: 0
+  m_LinearX: 2
+  m_LinearY: 2
+  m_LinearZ: 2
+  m_SwingY: 2
+  m_SwingZ: 2
+  m_Twist: 2
+  m_XDrive:
+    lowerLimit: 0
+    upperLimit: 0
+    stiffness: 0
+    damping: 0
+    forceLimit: 3.4028235e+38
+    target: 0
+    targetVelocity: 0
+    driveType: 0
+  m_YDrive:
+    lowerLimit: 0
+    upperLimit: 0
+    stiffness: 0
+    damping: 0
+    forceLimit: 3.4028235e+38
+    target: 0
+    targetVelocity: 0
+    driveType: 0
+  m_ZDrive:
+    lowerLimit: 0
+    upperLimit: 0
+    stiffness: 0
+    damping: 0
+    forceLimit: 3.4028235e+38
+    target: 0
+    targetVelocity: 0
+    driveType: 0
+  m_LinearDamping: 0.05
+  m_AngularDamping: 0.05
+  m_JointFriction: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_Immovable: 0
+  m_UseGravity: 1
+  m_CollisionDetectionMode: 0
 --- !u!1 &1292130085862502842
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,6 +334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1429893153029682810}
   - component: {fileID: 79556066133399292}
+  - component: {fileID: 1091171224220665670}
   m_Layer: 0
   m_Name: Station
   m_TagString: Untagged
@@ -275,7 +357,7 @@ Transform:
   - {fileID: 8478261407785620748}
   - {fileID: 4925295624631126426}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &79556066133399292
 MonoBehaviour:
@@ -290,6 +372,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 4119064999089314409}
+--- !u!114 &1091171224220665670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548426415748985515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d53c49226c442d9b85e32fcead6755f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 5710556726794817704}
 --- !u!1 &2317772310174306872
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +398,7 @@ GameObject:
   - component: {fileID: 1132917417285557641}
   - component: {fileID: 930353845955298720}
   - component: {fileID: 7970668833216873714}
-  - component: {fileID: 6800666402025041067}
+  - component: {fileID: 478612689330967797}
   m_Layer: 0
   m_Name: Moveable
   m_TagString: Untagged
@@ -463,7 +558,7 @@ ArticulationBody:
   m_Immovable: 0
   m_UseGravity: 1
   m_CollisionDetectionMode: 0
---- !u!114 &6800666402025041067
+--- !u!114 &478612689330967797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -472,10 +567,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2317772310174306872}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 597b584c18114e54b63b249c264ecb91, type: 3}
+  m_Script: {fileID: 11500000, guid: ab84d1d2d3b14578b46a0115d228223a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closedZ: 4
+  closedZ: 0
 --- !u!1 &3595791721473475406
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,6 +863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveState: 0
   speed: 5
+  target: {fileID: 0}
 --- !u!1 &4659454781940034426
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,6 +975,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1890126200228744322}
   - component: {fileID: 8932723411020592662}
+  - component: {fileID: 5183662285087668245}
   m_Layer: 0
   m_Name: Clamp
   m_TagString: Untagged
@@ -969,6 +1066,23 @@ ArticulationBody:
   m_Immovable: 0
   m_UseGravity: 1
   m_CollisionDetectionMode: 0
+--- !u!114 &5183662285087668245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5710556726794817704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed12b2313c4042d4a3790d2c643c2be0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fingerA: {fileID: 2317772310174306872}
+  fingerB: {fileID: 295781715269163144}
+  grip: 0
+  gripSpeed: 3
+  gripState: 0
 --- !u!1 &6879035857877121366
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,34 +1,31 @@
 ﻿using UnityEngine;
 
+
 public class ChipClampController : MonoBehaviour
 {
-   
-    public float closedZ; 
+    public GameObject fingerA;
+    public GameObject fingerB;
 
-    Vector3 openPosition;
-    ArticulationBody articulation;
+    PincherFingerController fingerAController;
+    PincherFingerController fingerBController;
+
+    // Grip - the extent to which the pincher is closed. 0: fully open, 1: fully closed.
+    public float grip;
+    public float gripSpeed = 3.0f;
+    public GripState gripState = GripState.Fixed;
 
 
-    // INIT
 
     void Start()
     {
-        openPosition = transform.localPosition;
-        articulation = GetComponent<ArticulationBody>();
-        SetLimits();
+        fingerAController = fingerA.GetComponent<PincherFingerController>();
+        fingerBController = fingerB.GetComponent<PincherFingerController>();
     }
 
-    void SetLimits()
+    void FixedUpdate()
     {
-        float openZTarget = ZDriveTarget(0.0f);
-        float closedZTarget = ZDriveTarget(1.0f);
-        float min = Mathf.Min(openZTarget, closedZTarget);
-        float max = Mathf.Max(openZTarget, closedZTarget);
-
-        var drive = articulation.zDrive;
-        drive.lowerLimit = min;
-        drive.upperLimit = max;
-        articulation.zDrive = drive;
+        UpdateGrip();
+        UpdateFingersForGrip();
     }
 
 
@@ -36,39 +33,53 @@ public class ChipClampController : MonoBehaviour
 
     public float CurrentGrip()
     {
-        float grip = Mathf.InverseLerp(openPosition.z, closedZ, transform.localPosition.z);
-        return grip;
+        // TODO - we can't really assume the fingers agree, need to think about that
+        float meanGrip = (fingerAController.CurrentGrip() + fingerBController.CurrentGrip()) / 2.0f;
+        return meanGrip;
     }
 
-    public Vector3 GetOpenPosition()
+
+    public Vector3 CurrentGraspCenter()
     {
-        return openPosition;
+        /* Gets the point directly between the middle of the pincher fingers,
+         * in the global coordinate system.      
+         */
+        Vector3 localCenterPoint = (fingerAController.GetOpenPosition() + fingerBController.GetOpenPosition()) / 2.0f;
+        Vector3 globalCenterPoint = transform.TransformPoint(localCenterPoint);
+        return globalCenterPoint;
     }
+
 
     // CONTROL
 
-    private void UpdateGrip(float grip)
+    public void ResetGripToOpen()
     {
-        float targetZ = ZDriveTarget(grip);
-        var drive = articulation.zDrive;
-        drive.target = targetZ;
-        articulation.zDrive = drive;
+        grip = 0.0f;
+        fingerAController.ForceOpen(transform);
+        fingerBController.ForceOpen(transform);
+        gripState = GripState.Fixed;
     }
 
-    public void ForceOpen(Transform transform)
+    // GRIP HELPERS
+
+    void UpdateGrip()
     {
-        transform.localPosition = openPosition;
-        UpdateGrip(0.0f);
+        if (gripState != GripState.Fixed)
+        {
+            float gripChange = (float)gripState * gripSpeed * Time.fixedDeltaTime;
+            float gripGoal = CurrentGrip() + gripChange;
+            grip = Mathf.Clamp01(gripGoal);
+        }
     }
 
-    // HELPERS
-
-    float ZDriveTarget(float grip)
+    void UpdateFingersForGrip()
     {
-        float zPosition = Mathf.Lerp(openPosition.z, closedZ, grip);
-        float targetZ = (zPosition - openPosition.z) * transform.parent.localScale.z;
-        return targetZ;
+        fingerAController.UpdateGrip(grip);
+        fingerBController.UpdateGrip(grip);
     }
+
+
+
 
 
 }

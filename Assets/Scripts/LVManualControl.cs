@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ManualInputStation : MonoBehaviour
+public class LVManualControl : MonoBehaviour
 {
     public GameObject hand;
 
