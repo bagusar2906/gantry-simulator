@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
@@ -12,8 +10,7 @@ public class OutlineSelection : MonoBehaviour
 
     private RaycastHit _raycastHit;
     // Start is called before the first frame update
-  
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -32,13 +29,14 @@ public class OutlineSelection : MonoBehaviour
             _highLight = _raycastHit.transform;
             if (_highLight.CompareTag("Selectable") )
             {
-                if (_highLight.gameObject.GetComponent<Outline>() != null)
+                var outline = _highLight.gameObject.GetComponent<Outline>();
+                if (outline != null)
                 {
-                    _highLight.GetComponent<Outline>().enabled = true;
+                   outline.enabled = true;
                 }
                 else
                 {
-                    var outline = _highLight.gameObject.AddComponent<Outline>();
+                    outline = _highLight.gameObject.AddComponent<Outline>();
                     outline.enabled = true;
                     outline.OutlineColor = Color.cyan;
                     outline.OutlineWidth = 2.0f;
@@ -52,17 +50,26 @@ public class OutlineSelection : MonoBehaviour
         
         //Selection
 
-        if (!Input.GetMouseButtonDown((int)MouseButton.RightMouse)) return;
+        if (!Input.GetMouseButtonDown((int)MouseButton.LeftMouse)) return;
         if (_highLight)
         {
-            if (_selection != null)
+            /*if (_highLight.parent != null)
             {
-                _selection.gameObject.GetComponent<Outline>().enabled = false;
-            }
+                var clamp = _highLight.parent.gameObject.GetComponent<ChipClampController>();
+                if (clamp != null)
+                {
+
+                    clamp.gripState = clamp.CurrentState != GripState.Opening ? GripState.Closing : GripState.Opening;
+                }
+            }*/
+            // if (_selection != null)
+            // {
+            //   //  _selection.gameObject.GetComponent<Outline>().enabled = false;
+            // }
 
             _selection = _raycastHit.transform;
-            _selection.gameObject.GetComponent<Outline>().enabled = true;
-            _highLight = null;
+          //  _selection.gameObject.GetComponent<Outline>().enabled = true;
+           // _highLight = null;
         }
         else
         {

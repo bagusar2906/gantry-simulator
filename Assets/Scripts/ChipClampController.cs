@@ -14,7 +14,7 @@ public class ChipClampController : MonoBehaviour
     public float gripSpeed = 3.0f;
     public GripState gripState = GripState.Fixed;
 
-
+    public GripState CurrentState { get; private set; }
 
     void Start()
     {
@@ -69,6 +69,7 @@ public class ChipClampController : MonoBehaviour
             float gripChange = (float)gripState * gripSpeed * Time.fixedDeltaTime;
             float gripGoal = CurrentGrip() + gripChange;
             grip = Mathf.Clamp01(gripGoal);
+            CurrentState = gripState;
         }
     }
 

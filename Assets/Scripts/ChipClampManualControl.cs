@@ -1,18 +1,25 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ChipClampManualControl : MonoBehaviour
 {
-    public GameObject hand;
+     public GameObject chipClamp;
 
 
     void Update()
     {
         float input = Input.GetAxis("ChipClamp");
         var moveState = MoveStateForInput(input);
-        var controller = hand.GetComponent<ChipClampController>();
-        controller.gripState = moveState;
+        var controller = chipClamp.GetComponent<ChipClampController>();
+       // controller.gripState = moveState;
     }
 
+    public void OnClampButtonClick()
+    {
+        
+    }
+    
     GripState MoveStateForInput(float input)
     {
         if (input > 0)
