@@ -2986,7 +2986,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -345, y: 145}
+  m_AnchoredPosition: {x: -345, y: 0}
   m_SizeDelta: {x: -745.00006, y: -381.2103}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1267845988
@@ -4191,6 +4191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e05ab8ade2524b609d4ae70532e3ef11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contextMenuAdapterPrefab: {fileID: 7856131486789919478, guid: 3483223bfd5d6c34aa88739d12831f87, type: 3}
+  contextMenuSetVolumePrefab: {fileID: 7493046789615500417, guid: 36f48b5ba8da7364ebc8598c578b2d95, type: 3}
 --- !u!4 &1827685236
 Transform:
   m_ObjectHideFlags: 0
@@ -4887,7 +4889,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 600157029575719252, guid: 36f48b5ba8da7364ebc8598c578b2d95, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 144
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 600157029575719252, guid: 36f48b5ba8da7364ebc8598c578b2d95, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5498,6 +5500,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 50mLTubeAdapter
       objectReference: {fileID: 0}
+    - target: {fileID: 9025628704415854473, guid: 97b4c3ba7ba68a7478844281f703c275, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5514,6 +5520,10 @@ PrefabInstance:
     - target: {fileID: 1808329207757848549, guid: 79040e39652c403479a5ffcd68e8b8dd, type: 3}
       propertyPath: m_Name
       value: 50mLTube
+      objectReference: {fileID: 0}
+    - target: {fileID: 1808329207757848549, guid: 79040e39652c403479a5ffcd68e8b8dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5167170394719221426, guid: 79040e39652c403479a5ffcd68e8b8dd, type: 3}
       propertyPath: m_RootOrder

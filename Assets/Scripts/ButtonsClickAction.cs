@@ -7,8 +7,11 @@ using UnityEngine.UI;
 public class ButtonsClickAction : MonoBehaviour
 {
     public TMP_Dropdown adapterSelection;
-    [FormerlySerializedAs("volume")] public GameObject volumeInput;
+    public GameObject volumeInput;
     public GameObject chipClamp;
+ 
+    public GameObject ContextMenu { get; set; }
+
     private string _selectedOption;
 
     private void Start()
@@ -51,9 +54,17 @@ public class ButtonsClickAction : MonoBehaviour
               
                 break;
             default:
-                
-                var volume = volumeInput.GetComponentInChildren<InputField>();
-                Debug.Log($"Tube: {_selectedOption} ml, Volume: {volume.text}");
+                if (adapterSelection != null)
+                {
+                    Debug.Log($"Tube: {_selectedOption} ml");
+                }
+                else if (volumeInput != null)
+                {
+                    var volume = volumeInput.GetComponentInChildren<InputField>();
+                    Debug.Log($"Set Volume: {volume.text}");
+                }
+
+                Destroy(ContextMenu);
                 break;
         }
     }

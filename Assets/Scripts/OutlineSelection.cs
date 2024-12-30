@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 public class OutlineSelection : MonoBehaviour
 {
+    public GameObject contextMenuAdapterPrefab;
+    public GameObject contextMenuSetVolumePrefab;
+    private GameObject _currentContextMenu;
     private Transform _highLight;
 
     private Transform _selection;
@@ -48,9 +52,14 @@ public class OutlineSelection : MonoBehaviour
             }
         }
         
-        //Selection
+        if (!Input.GetMouseButtonDown((int)MouseButton.RightMouse)) return;
+        // Destroy existing context menu
+        if (_currentContextMenu != null)
+        {
+            Destroy(_currentContextMenu);
+            return;
+        }
 
-        if (!Input.GetMouseButtonDown((int)MouseButton.LeftMouse)) return;
         if (_highLight)
         {
             /*if (_highLight.parent != null)
@@ -66,6 +75,32 @@ public class OutlineSelection : MonoBehaviour
             // {
             //   //  _selection.gameObject.GetComponent<Outline>().enabled = false;
             // }
+            
+            // Instantiate the context menu
+            var mousePosition = Input.mousePosition;
+            mousePosition.y += 50;
+            
+            _currentContextMenu =
+                Instantiate(
+                    _highLight.transform.gameObject.name.Contains("LoadCell")
+                        ? contextMenuAdapterPrefab
+                        : contextMenuSetVolumePrefab, mousePosition, Quaternion.identity, FindObjectOfType<Canvas>().transform);
+
+            var clickButton = _currentContextMenu.GetComponentInChildren<ButtonsClickAction>();
+            if (clickButton != null)
+                clickButton.ContextMenu = _currentContextMenu;
+            // Adjust menu position to avoid going out of screen bounds
+            var rect = _currentContextMenu.GetComponent<RectTransform>();
+            Vector2 screenBounds = new Vector2(Screen.width, Screen.height);
+
+            if (mousePosition.x + rect.sizeDelta.x > screenBounds.x)
+                mousePosition.x -= rect.sizeDelta.x;
+
+            if (mousePosition.y - rect.sizeDelta.y < 0)
+                mousePosition.y += rect.sizeDelta.y;
+
+            _currentContextMenu.transform.position = mousePosition;
+            
 
             _selection = _raycastHit.transform;
           //  _selection.gameObject.GetComponent<Outline>().enabled = true;
