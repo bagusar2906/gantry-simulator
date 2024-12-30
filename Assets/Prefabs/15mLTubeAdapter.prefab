@@ -118,7 +118,6 @@ GameObject:
   - component: {fileID: 311552948744349917}
   - component: {fileID: 718453766336694129}
   - component: {fileID: 4414749314113596554}
-  - component: {fileID: 1498079133840256553}
   m_Layer: 0
   m_Name: 15mLTubeAdapter
   m_TagString: Untagged
@@ -134,9 +133,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530669958586652702}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4649, y: 15.28, z: 2.09}
-  m_LocalScale: {x: 34.99278, y: 11.384693, z: 38.1281}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 38.000004, y: 11.749548, z: 41.40477}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3679932489562809397}
   m_Father: {fileID: 0}
@@ -219,29 +218,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &1498079133840256553
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1530669958586652702}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.008550973
-  m_Height: 0.10096468
-  m_Direction: 1
-  m_Center: {x: -0.000000004656613, y: -0.034059644, z: 0.0000000018626451}
 --- !u!1 &7148218196515389561
 GameObject:
   m_ObjectHideFlags: 0

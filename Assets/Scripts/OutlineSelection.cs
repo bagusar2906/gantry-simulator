@@ -87,8 +87,8 @@ public class OutlineSelection : MonoBehaviour
                         : contextMenuSetVolumePrefab, mousePosition, Quaternion.identity, FindObjectOfType<Canvas>().transform);
 
             var clickButton = _currentContextMenu.GetComponentInChildren<ButtonsClickAction>();
-            if (clickButton != null)
-                clickButton.ContextMenu = _currentContextMenu;
+            clickButton.ContextMenu = _currentContextMenu;
+            clickButton.MenuOwner = _highLight.transform.gameObject;
             // Adjust menu position to avoid going out of screen bounds
             var rect = _currentContextMenu.GetComponent<RectTransform>();
             Vector2 screenBounds = new Vector2(Screen.width, Screen.height);

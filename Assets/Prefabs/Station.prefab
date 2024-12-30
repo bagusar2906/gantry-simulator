@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 2463369674515869210}
   - component: {fileID: 8291673576584111468}
   m_Layer: 0
-  m_Name: RightLoadCell
+  m_Name: LeftLoadCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1572,7 +1572,7 @@ GameObject:
   - component: {fileID: 7721636580660797328}
   - component: {fileID: 4163615845586573638}
   m_Layer: 0
-  m_Name: LeftLoadCell
+  m_Name: RightLoadCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
