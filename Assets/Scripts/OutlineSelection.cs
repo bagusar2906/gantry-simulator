@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 public class OutlineSelection : MonoBehaviour
@@ -9,8 +8,6 @@ public class OutlineSelection : MonoBehaviour
     public GameObject contextMenuSetVolumePrefab;
     private GameObject _currentContextMenu;
     private Transform _highLight;
-
-    private Transform _selection;
 
     private RaycastHit _raycastHit;
     // Start is called before the first frame update
@@ -53,6 +50,7 @@ public class OutlineSelection : MonoBehaviour
         }
         
         if (!Input.GetMouseButtonDown((int)MouseButton.RightMouse)) return;
+       
         // Destroy existing context menu
         if (_currentContextMenu != null)
         {
@@ -62,22 +60,10 @@ public class OutlineSelection : MonoBehaviour
 
         if (_highLight)
         {
-            /*if (_highLight.parent != null)
-            {
-                var clamp = _highLight.parent.gameObject.GetComponent<ChipClampController>();
-                if (clamp != null)
-                {
-
-                    clamp.gripState = clamp.CurrentState != GripState.Opening ? GripState.Closing : GripState.Opening;
-                }
-            }*/
-            // if (_selection != null)
-            // {
-            //   //  _selection.gameObject.GetComponent<Outline>().enabled = false;
-            // }
             
             // Instantiate the context menu
-            var mousePosition = Input.mousePosition;
+
+            var mousePosition = Camera.main.WorldToScreenPoint(_highLight.transform.position);
             mousePosition.y += 50;
             
             _currentContextMenu =
@@ -89,9 +75,11 @@ public class OutlineSelection : MonoBehaviour
             var clickButton = _currentContextMenu.GetComponentInChildren<ButtonsClickAction>();
             clickButton.ContextMenu = _currentContextMenu;
             clickButton.MenuOwner = _highLight.transform.gameObject;
+
+           
             // Adjust menu position to avoid going out of screen bounds
             var rect = _currentContextMenu.GetComponent<RectTransform>();
-            Vector2 screenBounds = new Vector2(Screen.width, Screen.height);
+            var screenBounds = new Vector2(Screen.width, Screen.height);
 
             if (mousePosition.x + rect.sizeDelta.x > screenBounds.x)
                 mousePosition.x -= rect.sizeDelta.x;
@@ -101,16 +89,7 @@ public class OutlineSelection : MonoBehaviour
 
             _currentContextMenu.transform.position = mousePosition;
             
-
-            _selection = _raycastHit.transform;
-          //  _selection.gameObject.GetComponent<Outline>().enabled = true;
-           // _highLight = null;
         }
-        else
-        {
-            if (!_selection) return;
-            _selection.gameObject.GetComponent<Outline>().enabled = false;
-            _selection = null;
-        }
+       
     }
 }
