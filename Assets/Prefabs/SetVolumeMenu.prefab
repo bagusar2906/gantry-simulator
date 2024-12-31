@@ -387,6 +387,11 @@ MonoBehaviour:
   adapterSelection: {fileID: 0}
   volumeInput: {fileID: 4381474944330852979}
   chipClamp: {fileID: 0}
+  tubeAdapter50: {fileID: 0}
+  tube50: {fileID: 0}
+  tubeAdapter15: {fileID: 0}
+  tube15: {fileID: 0}
+  menuType: 1
 --- !u!1001 &8160487349342976978
 PrefabInstance:
   m_ObjectHideFlags: 0

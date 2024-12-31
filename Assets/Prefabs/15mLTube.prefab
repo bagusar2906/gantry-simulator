@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volume: 0
-  offset: 0
-  scale: 0
+  offset: -3.7
+  scale: 0.29
   liquidColor: {r: 0.050980393, g: 0.14509805, b: 0.9529412, a: 0}
   surfaceColor: {r: 0.28627452, g: 0.99215686, b: 0.9843137, a: 0}
 --- !u!1 &6523292529649882941
