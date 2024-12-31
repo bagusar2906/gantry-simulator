@@ -147,16 +147,19 @@ public class MessageboxExample : MonoBehaviour
         else { print("Fine, be that way..."); }
     }
 
+
     void ActuallyExit()
     {
         MessageBox.Show("Thanks for playing this awesome game!", "Thanks Player", MessageBoxButtons.OK, QuitEditor);
     }
 
-#if UNITY_EDITOR
+
     void QuitEditor()
     {
+#if UNITY_EDITOR
         if (Application.isEditor) { UnityEditor.EditorApplication.isPlaying = false; }
-    }
 #endif
+    }
+
     #endregion
 }
