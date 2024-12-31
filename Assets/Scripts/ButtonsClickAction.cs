@@ -13,6 +13,7 @@ public class ButtonsClickAction : MonoBehaviour
     public GameObject tubeAdapter15;
     public GameObject tube15;
     public ContextMenuType menuType;
+    public GameObject peristalticPump;
     public GameObject MenuOwner { private get; set; }
     
     public GameObject ContextMenu { get; set; }
@@ -21,26 +22,30 @@ public class ButtonsClickAction : MonoBehaviour
 
     private void Start()
     {
-        if (menuType == ContextMenuType.VolumeSetter)
+        switch (menuType)
         {
-            var optionSelector = volumeInput.GetComponentInChildren<OptionSelector>();
-            optionSelector.minFloat = 0.1f;
-            optionSelector.maxFloat = MenuOwner.name.Contains("50") ? 50.0f : 15.0f;
-            optionSelector.valueIndex = 0;
+            case ContextMenuType.VolumeSetter:
+            {
+                var optionSelector = volumeInput.GetComponentInChildren<OptionSelector>();
+                optionSelector.minFloat = 0.1f;
+                optionSelector.maxFloat = MenuOwner.name.Contains("50") ? 50.0f : 15.0f;
+                optionSelector.valueIndex = 0;
 
-            var liquidControl = MenuOwner.GetComponentInChildren<LiquidControl>();
-            var volume = volumeInput.GetComponentInChildren<InputField>();
-            volume.text = liquidControl.volume.ToString(CultureInfo.CurrentCulture);
-            
-        }
-        else if (menuType == ContextMenuType.AdapterSelection)
-        {
-            adapterSelection.onValueChanged.AddListener(OnTMPDropdownValueChanged);
+                var liquidControl = MenuOwner.GetComponentInChildren<LiquidControl>();
+                var volume = volumeInput.GetComponentInChildren<InputField>();
+                volume.text = liquidControl.volume.ToString(CultureInfo.CurrentCulture);
+                break;
+            }
+            case ContextMenuType.AdapterSelection:
+            {
+                adapterSelection.onValueChanged.AddListener(OnTMPDropdownValueChanged);
 
-            // Optionally, get the initial value
-            var currentIndex = adapterSelection.value;
-            _selectedOption = adapterSelection.options[currentIndex].text;
-            Debug.Log($"Initial Value: {_selectedOption}");
+                // Optionally, get the initial value
+                var currentIndex = adapterSelection.value;
+                _selectedOption = adapterSelection.options[currentIndex].text;
+                Debug.Log($"Initial Value: {_selectedOption}");
+                break;
+            }
         }
     }
 
@@ -54,11 +59,13 @@ public class ButtonsClickAction : MonoBehaviour
     {
         Debug.Log(name + " was clicked.");
 
+        Text caption;
+        ChipClampController controller;
         switch (menuType)
         {
             case ContextMenuType.ChipClamp:
-                var caption = GetComponentInChildren<Text>();
-                var controller = chipClamp.GetComponent<ChipClampController>();
+                caption = GetComponentInChildren<Text>();
+                controller = chipClamp.GetComponent<ChipClampController>();
                 if (caption.text == "Clamp")
                 {
                     controller.gripState = GripState.Closing;
@@ -68,6 +75,21 @@ public class ButtonsClickAction : MonoBehaviour
                 {
                     controller.gripState = GripState.Opening;
                     caption.text = "Clamp";
+                }
+
+                break;
+            case ContextMenuType.PeristalticPump:
+                caption = GetComponentInChildren<Text>();
+                var pumpController = peristalticPump.GetComponentInChildren<PeristalticPump>();
+                if (caption.text.Contains("ON"))
+                {
+                    pumpController.MoveVel(10, true);
+                    caption.text = "Pump OFF";
+                }
+                else
+                {
+                    pumpController.AbortMotor();
+                    caption.text = "Pump ON";
                 }
 
                 break;

@@ -2,5 +2,6 @@
 {
     AdapterSelection,
     VolumeSetter,
-    ChipClamp
+    ChipClamp,
+    PeristalticPump
 }
