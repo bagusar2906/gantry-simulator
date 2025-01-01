@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using DTOs;
+using Sensors;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Serialization;
 
 namespace SimulatorHub
 {
@@ -13,9 +15,13 @@ namespace SimulatorHub
 
         public GameObject chipClamp;
         public GameObject peristalticPump;
+        public GameObject leftLoadCell;
+        public GameObject lowVolumeLoadCell;
+        public GameObject rightLoadCell;
         private PeristalticPump _pumpController;
         private ChipClampController _chipClampController;
 
+        private IDictionary<VolumeSensorEnum, VolumeSensor> _volumeSensors;
 
         // Start is called before the first frame update
         void Start()
@@ -51,8 +57,11 @@ namespace SimulatorHub
 
             _pumpController = GetComponentInChildren<PeristalticPump>();
             _chipClampController = GetComponentInChildren<ChipClampController>();
-          
 
+            _volumeSensors = new Dictionary<VolumeSensorEnum, VolumeSensor>();
+            _volumeSensors[VolumeSensorEnum.Left] = leftLoadCell.GetComponentInChildren<VolumeSensor>();
+            _volumeSensors[VolumeSensorEnum.LowVolume] = lowVolumeLoadCell.GetComponentInChildren<VolumeSensor>();
+            _volumeSensors[VolumeSensorEnum.Right] = rightLoadCell.GetComponentInChildren<VolumeSensor>();
         }
 
         private void RegisterServices()
@@ -72,7 +81,6 @@ namespace SimulatorHub
 
         private void ClearMotorFaultAction(string obj)
         {
-            throw new NotImplementedException();
         }
 
         private void MoveSliderAction(string obj)
@@ -80,14 +88,16 @@ namespace SimulatorHub
             throw new NotImplementedException();
         }
 
-        private void UpdateVolumeAction(string obj)
+        private void UpdateVolumeAction(string request)
         {
-            throw new NotImplementedException();
+            var dto = JsonUtility.FromJson<VolumeSensorDto>(request);
+            if (_volumeSensors.TryGetValue((VolumeSensorEnum)dto.id, out var volumeSensor))
+                volumeSensor.UpdateVolume((float)dto.weight);
         }
 
         private void HomeAction(string obj)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void StopMoveAction(string obj)

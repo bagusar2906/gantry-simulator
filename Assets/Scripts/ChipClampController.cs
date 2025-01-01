@@ -20,6 +20,7 @@ public class ChipClampController : MonoBehaviour
     {
         fingerAController = fingerA.GetComponent<PincherFingerController>();
         fingerBController = fingerB.GetComponent<PincherFingerController>();
+        CurrentState = GripState.Opened;
     }
 
     void FixedUpdate()
