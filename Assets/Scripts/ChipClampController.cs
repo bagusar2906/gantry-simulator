@@ -64,13 +64,11 @@ public class ChipClampController : MonoBehaviour
 
     void UpdateGrip()
     {
-        if (gripState != GripState.Fixed)
-        {
-            float gripChange = (float)gripState * gripSpeed * Time.fixedDeltaTime;
-            float gripGoal = CurrentGrip() + gripChange;
-            grip = Mathf.Clamp01(gripGoal);
-            CurrentState = gripState;
-        }
+        if (gripState == GripState.Fixed) return;
+        var gripChange = (float)gripState * gripSpeed * Time.fixedDeltaTime;
+        var gripGoal = CurrentGrip() + gripChange;
+        grip = Mathf.Clamp01(gripGoal);
+        CurrentState = gripState == GripState.Opening ? GripState.Opened:GripState.Closed;
     }
 
     void UpdateFingersForGrip()

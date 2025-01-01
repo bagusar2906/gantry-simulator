@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b55abe60a7cb4e0ba542a5efd3d34c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 1.5
+  volume: 0
   offset: -0.851
   scale: 0.65
   liquidColor: {r: 0.050980393, g: 0.14509805, b: 0.9529412, a: 0}

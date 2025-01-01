@@ -60,13 +60,12 @@ public class ButtonsClickAction : MonoBehaviour
         Debug.Log(name + " was clicked.");
 
         Text caption;
-        ChipClampController controller;
         switch (menuType)
         {
             case ContextMenuType.ChipClamp:
                 caption = GetComponentInChildren<Text>();
-                controller = chipClamp.GetComponent<ChipClampController>();
-                if (caption.text == "Clamp")
+                var controller = chipClamp.GetComponent<ChipClampController>();
+                if (controller.CurrentState == GripState.Opened)
                 {
                     controller.gripState = GripState.Closing;
                     caption.text = "UnClamp";
@@ -81,7 +80,7 @@ public class ButtonsClickAction : MonoBehaviour
             case ContextMenuType.PeristalticPump:
                 caption = GetComponentInChildren<Text>();
                 var pumpController = peristalticPump.GetComponentInChildren<PeristalticPump>();
-                if (caption.text.Contains("ON"))
+                if (!pumpController.IsPumping)
                 {
                     pumpController.MoveVel(10, true);
                     caption.text = "Pump OFF";

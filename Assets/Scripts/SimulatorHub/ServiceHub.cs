@@ -10,14 +10,12 @@ namespace SimulatorHub
     {
         private SignalR _signalR;
         public TMP_Text statusDisplay;
-   
-        public GameObject pumpButton;
-        public GameObject clampButton;
 
+        public GameObject chipClamp;
+        public GameObject peristalticPump;
+        private PeristalticPump _pumpController;
+        private ChipClampController _chipClampController;
 
-        private PeristalticPump _peristalticPump;
-        private ButtonsClickAction _clampButton;
-        private ButtonsClickAction _pumpButton;
 
         // Start is called before the first frame update
         void Start()
@@ -51,9 +49,9 @@ namespace SimulatorHub
                 UpdateStatus($"Error:{e.Message}");
             }
 
-            _peristalticPump = GetComponentInChildren<PeristalticPump>();
-            _clampButton = clampButton.GetComponent<ButtonsClickAction>();
-            _pumpButton = pumpButton.GetComponent<ButtonsClickAction>();
+            _pumpController = GetComponentInChildren<PeristalticPump>();
+            _chipClampController = GetComponentInChildren<ChipClampController>();
+          
 
         }
 
@@ -104,16 +102,16 @@ namespace SimulatorHub
 
         private void ClampChipAction(string request)
         {
-            
-           _clampButton.OnClick();
-          
+            var dto = JsonUtility.FromJson<ClampChipDto>(request);
+            _chipClampController.gripState = _chipClampController.CurrentState == GripState.Opened
+                ? GripState.Closing
+                : GripState.Opening;
         }
 
         private void MoveVelAction(string request)
         {
            var dto = JsonUtility.FromJson<MoveVelDto>(request);
-           _pumpButton.OnClick();
-          // _peristalticPump.MoveVel(dto.velocity, true);
+            _pumpController.MoveVel(dto.velocity, true);
         }
 
         private void MoveAbsAction(string request)

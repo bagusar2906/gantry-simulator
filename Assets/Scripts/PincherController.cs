@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public enum GripState { Fixed = 0, Opening = -1, Closing = 1 };
+public enum GripState { Fixed = 0, Opening = -1, Closing = 1, Opened = 2, Closed = 3 };
 
 public class PincherController : MonoBehaviour
 {

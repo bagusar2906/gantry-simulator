@@ -4075,8 +4075,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusDisplay: {fileID: 506756250}
-  pumpButton: {fileID: 328236728}
-  clampButton: {fileID: 1334546268}
+  chipClamp: {fileID: 311203839}
+  peristalticPump: {fileID: 2017861998}
 --- !u!224 &1570389124 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5671213689884699731, guid: 2ffd02ed1b0e2ef48a799ba51cd84c84, type: 3}
@@ -5929,6 +5929,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 933211955649418163, guid: 0415b69312406f34da36223822893765, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.49
+      objectReference: {fileID: 0}
     - target: {fileID: 1091171224220665670, guid: 0415b69312406f34da36223822893765, type: 3}
       propertyPath: chipClamp
       value: 
@@ -6024,6 +6028,10 @@ PrefabInstance:
     - target: {fileID: 3052597934632791573, guid: 0415b69312406f34da36223822893765, type: 3}
       propertyPath: m_Name
       value: LiquidFlow
+      objectReference: {fileID: 0}
+    - target: {fileID: 4446155631693186284, guid: 0415b69312406f34da36223822893765, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.4900002
       objectReference: {fileID: 0}
     - target: {fileID: 5310146511379397624, guid: 0415b69312406f34da36223822893765, type: 3}
       propertyPath: m_LocalPosition.z

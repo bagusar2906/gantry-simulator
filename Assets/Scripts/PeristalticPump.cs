@@ -12,7 +12,8 @@ public class PeristalticPump : MonoBehaviour
     private readonly double _updatePositionIntervalInSec = 0.5;
     private float _rotationSpeed = 0;
     private double _totalTime;
-   
+
+    public bool IsPumping => _rotationSpeed > 0;
     // Start is called before the first frame update
     void Start()
     {
