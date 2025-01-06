@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PeristalticPump : MonoBehaviour
@@ -20,7 +18,7 @@ public class PeristalticPump : MonoBehaviour
         liquidFlow.Stop();
     }
     
-    public ushort MoveVel(double vel, bool forward)
+    public ushort MoveVel(short busId, short motorId, double vel, bool forward)
     {
         _rotationSpeed = rotationSpeed;
         if (!(rotationSpeed > 0)) return 0;

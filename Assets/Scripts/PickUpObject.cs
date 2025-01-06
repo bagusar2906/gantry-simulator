@@ -39,13 +39,13 @@ public class PickUpObject : MonoBehaviour
     void TryPickUpObject()
     {
         // Cast a ray from the camera to the mouse position
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
         {
             // Check if the object has a Rigidbody and is movable
-            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+            var rb = hit.collider.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 pickedObject = hit.collider.gameObject;
@@ -58,18 +58,20 @@ public class PickUpObject : MonoBehaviour
     void MovePickedObject()
     {
         // Calculate the new position of the object
-        Vector3 mousePosition = Input.mousePosition;
+        var mousePosition = Input.mousePosition;
         mousePosition.z = pickUpDistance; // Set the distance from the camera
-        Vector3 targetPosition = mainCamera.ScreenToWorldPoint(mousePosition);
-
+        var targetPosition = mainCamera.ScreenToWorldPoint(mousePosition);
+        var position = pickedObject.transform.position;
+        targetPosition.z = position.z;
         // Smoothly move the object to the target position
-        pickedObject.transform.position = Vector3.Lerp(pickedObject.transform.position, targetPosition, Time.deltaTime * 10f);
+        position = Vector3.Lerp(position, targetPosition, Time.deltaTime * 10f);
+        pickedObject.transform.position = position;
     }
 
     void DropObject()
     {
         // Drop the object
-        Rigidbody rb = pickedObject.GetComponent<Rigidbody>();
+        var rb = pickedObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.useGravity = true; // Re-enable gravity

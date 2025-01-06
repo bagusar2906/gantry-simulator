@@ -1209,7 +1209,7 @@ GameObject:
   - component: {fileID: 4751801071155279423}
   - component: {fileID: 2463369674515869210}
   - component: {fileID: 8291673576584111468}
-  - component: {fileID: 4406796134210846984}
+  - component: {fileID: 458892223919556853}
   m_Layer: 0
   m_Name: LeftLoadCell
   m_TagString: Untagged
@@ -1303,7 +1303,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000002, y: 2, z: 1.0000002}
   m_Center: {x: 0.00000017881393, y: 0, z: -0.00000008940697}
---- !u!114 &4406796134210846984
+--- !u!114 &458892223919556853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1312,9 +1312,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1292130085862502842}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd739a45d2b3bb14b8bd5c1ce325d771, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ba2089a868b48aeb3dbfc5ca23b39db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 1
 --- !u!1 &1522387067515457405
 GameObject:
   m_ObjectHideFlags: 0
@@ -6666,7 +6667,7 @@ GameObject:
   - component: {fileID: 7460607029282229826}
   - component: {fileID: 8064951408603231237}
   - component: {fileID: 376455802042535338}
-  - component: {fileID: 7931622955988403781}
+  - component: {fileID: 2391554434245521337}
   m_Layer: 0
   m_Name: LVLoadCell
   m_TagString: Untagged
@@ -6841,7 +6842,7 @@ MonoBehaviour:
   moveState: 0
   speed: 5
   target: {fileID: 0}
---- !u!114 &7931622955988403781
+--- !u!114 &2391554434245521337
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6850,9 +6851,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4119064999089314409}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd739a45d2b3bb14b8bd5c1ce325d771, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ba2089a868b48aeb3dbfc5ca23b39db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 2
 --- !u!1 &4659454781940034426
 GameObject:
   m_ObjectHideFlags: 0
@@ -7679,7 +7681,7 @@ GameObject:
   - component: {fileID: 2502037258135152633}
   - component: {fileID: 7721636580660797328}
   - component: {fileID: 4163615845586573638}
-  - component: {fileID: 6786846389736142427}
+  - component: {fileID: 9017339085954257953}
   m_Layer: 0
   m_Name: RightLoadCell
   m_TagString: Untagged
@@ -7773,7 +7775,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0000002, y: 2, z: 1.0000002}
   m_Center: {x: 7.1054274e-15, y: 0, z: -0.00000008940697}
---- !u!114 &6786846389736142427
+--- !u!114 &9017339085954257953
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7782,9 +7784,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8344629835854094687}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd739a45d2b3bb14b8bd5c1ce325d771, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ba2089a868b48aeb3dbfc5ca23b39db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
 --- !u!1 &8431571601476786516
 GameObject:
   m_ObjectHideFlags: 0
@@ -7969,14 +7972,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8478261407785620748}
     m_Modifications:
-    - target: {fileID: 2103004785165030606, guid: 9cfcad7010bf63a4ebe343289a58b5a9, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4033936410142804046, guid: 9cfcad7010bf63a4ebe343289a58b5a9, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5288855748010274439, guid: 9cfcad7010bf63a4ebe343289a58b5a9, type: 3}
       propertyPath: m_RootOrder
       value: -1

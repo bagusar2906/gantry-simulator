@@ -4,7 +4,6 @@ using DTOs;
 using Sensors;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace SimulatorHub
 {
@@ -13,6 +12,8 @@ namespace SimulatorHub
         private SignalR _signalR;
         public TMP_Text statusDisplay;
 
+        public short busId;
+        public short stationId;
         public GameObject chipClamp;
         public GameObject peristalticPump;
         public GameObject leftLoadCell;
@@ -20,8 +21,10 @@ namespace SimulatorHub
         public GameObject rightLoadCell;
         private PeristalticPump _pumpController;
         private ChipClampController _chipClampController;
+        private MotorController _motorController;
 
         private IDictionary<VolumeSensorEnum, VolumeSensor> _volumeSensors;
+        private ClampOnTouch _chipClampOnTouch;
 
         // Start is called before the first frame update
         void Start()
@@ -55,8 +58,21 @@ namespace SimulatorHub
                 UpdateStatus($"Error:{e.Message}");
             }
 
-            _pumpController = GetComponentInChildren<PeristalticPump>();
-            _chipClampController = GetComponentInChildren<ChipClampController>();
+            _pumpController = peristalticPump.GetComponentInChildren<PeristalticPump>();
+            _chipClampController = chipClamp.GetComponent<ChipClampController>();
+            _chipClampOnTouch = chipClamp.GetComponentInChildren<ClampOnTouch>();
+            _motorController = lowVolumeLoadCell.GetComponentInChildren<MotorController>();
+            _chipClampOnTouch.OnChipClampStateChanged += (sender, args) =>
+            {
+                var dto = new StateChangedDto()
+                {
+                    busId = 1,
+                    state = (short)args.State,
+                    stationId = 1
+                };
+                var json = JsonUtility.ToJson(dto);
+                _signalR.Invoke(EventHandlers.OnChipClampStateChanged, json);
+            };
 
             _volumeSensors = new Dictionary<VolumeSensorEnum, VolumeSensor>();
             _volumeSensors[VolumeSensorEnum.Left] = leftLoadCell.GetComponentInChildren<VolumeSensor>();
@@ -95,19 +111,21 @@ namespace SimulatorHub
                 volumeSensor.UpdateVolume((float)dto.weight);
         }
 
-        private void HomeAction(string obj)
+        private void HomeAction(string request)
         {
-            
+            var dto = JsonUtility.FromJson<HomeDto>(request);
+            _motorController.Home(dto.busId, dto.motorId, 800f);
         }
 
         private void StopMoveAction(string obj)
         {
-            throw new NotImplementedException();
+          
         }
 
-        private void SetMotionAbortAction(string obj)
+        private void SetMotionAbortAction(string request)
         {
-            throw new NotImplementedException();
+            var dto = JsonUtility.FromJson<SetMotionAbortDto>(request);
+            _motorController.MotionAbortEnabled = dto.enableMask > 0;
         }
 
         private void ClampChipAction(string request)
@@ -121,17 +139,59 @@ namespace SimulatorHub
         private void MoveVelAction(string request)
         {
            var dto = JsonUtility.FromJson<MoveVelDto>(request);
-            _pumpController.MoveVel(dto.velocity, true);
+            _pumpController.MoveVel(dto.busId, dto.motorId, dto.velocity, true);
         }
 
         private void MoveAbsAction(string request)
         {
-            
+            var dto = JsonUtility.FromJson<MoveAbsDto>(request);
+
+            _motorController.MoveAbs(dto.busId, dto.motorId, dto.velocity, dto.position);
+
         }
 
         private void PublishEvents()
         {
-           
+
+            _motorController.MotorMoveDone += (sender, args) =>
+            {
+                var dto = new MoveDoneDto()
+                {
+                    busId = args.BusId,
+                    motorId = args.MotorID,
+                    status = args.Status,
+                    position = args.Position,
+                    stationId = 1
+                };
+                var json = JsonUtility.ToJson(dto);
+                _signalR.Invoke(EventHandlers.MoveDone, json);
+            };
+
+            _motorController.MotorHomeDone += (sender, args) =>
+            {
+                var dto = new HomeDoneDto()
+                {
+                    busId = args.BusId,
+                    motorId = args.MotorID,
+                    position = args.Position,
+                    stationId = 1
+                };
+                var json = JsonUtility.ToJson(dto);
+                _signalR.Invoke(EventHandlers.HomeDone, json);
+            };
+
+            _motorController.MotorErrorOccured += (sender, args) =>
+            {
+                var dto = new MotorErrorDto()
+                {
+                    busId = args.BustId,
+                    stationId = stationId,
+                    motorId = args.MotorID,
+                    errorCode = args.MotorErrorCode
+                };
+                var json = JsonUtility.ToJson(dto);
+                _signalR.Invoke(EventHandlers.MotorErrorOccured, json);
+            };
         }
 
         private void UpdateStatus(string status)

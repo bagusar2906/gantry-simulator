@@ -82,7 +82,7 @@ public class ButtonsClickAction : MonoBehaviour
                 var pumpController = peristalticPump.GetComponentInChildren<PeristalticPump>();
                 if (!pumpController.IsPumping)
                 {
-                    pumpController.MoveVel(10, true);
+                    pumpController.MoveVel(5,1,10, true);
                     caption.text = "Pump OFF";
                 }
                 else
