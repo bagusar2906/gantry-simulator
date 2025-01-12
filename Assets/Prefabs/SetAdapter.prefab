@@ -129,11 +129,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: 50 mL
-      m_Image: {fileID: 0}
-    - m_Text: 15 mL
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -561,7 +557,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 50 mL
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1555,5 +1551,7 @@ MonoBehaviour:
   tube50: {fileID: 5752346321172954057, guid: 63d09ebd87ba33e4d8c40470976e0cec, type: 3}
   tubeAdapter15: {fileID: 1530669958586652702, guid: f467b7578b2a158488dce2520229b686, type: 3}
   tube15: {fileID: 5752346321172954057, guid: 66e35b5be51efde48a535dfc9a5fa582, type: 3}
+  tubeAdapter1_5: {fileID: 679725135229640969, guid: ec7736c7a1d14f74392ec5a56b1a3e57, type: 3}
+  tube1_5: {fileID: 5752346321172954057, guid: fe5a4d5b39ff67e468f2e0d448a7e92a, type: 3}
   menuType: 0
   peristalticPump: {fileID: 0}

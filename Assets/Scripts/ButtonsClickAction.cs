@@ -12,6 +12,8 @@ public class ButtonsClickAction : MonoBehaviour
     public GameObject tube50;
     public GameObject tubeAdapter15;
     public GameObject tube15;
+    public GameObject tubeAdapter1_5;
+    public GameObject tube1_5;
     public ContextMenuType menuType;
     public GameObject peristalticPump;
     public GameObject MenuOwner { private get; set; }
@@ -112,6 +114,14 @@ public class ButtonsClickAction : MonoBehaviour
                     tube.transform.position = new Vector3(x, 18.46f, 2.04f);
                     tubeAdapter = Instantiate(tubeAdapter15, tube.transform, true);
                     tubeAdapter.transform.localPosition = new Vector3(0f, -0.073f, 0.0023f);
+
+                }
+                else 
+                {
+                    tube = Instantiate(tube1_5);
+                    tube.transform.position = new Vector3(-0.01f, 18.92f, 2.01f);
+                    tubeAdapter = Instantiate(tubeAdapter1_5, tube.transform, true);
+                    tubeAdapter.transform.localPosition = new Vector3(0f, -0.073f, 0f);
 
                 }
 
