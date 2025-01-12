@@ -103,7 +103,7 @@ public class ButtonsClickAction : MonoBehaviour
                     tube = Instantiate(tube50);
                     tube.transform.position = new Vector3(x, 18.501f, 2.09f);
                     tubeAdapter = Instantiate(tubeAdapter50, tube.transform, true);
-                    tubeAdapter.transform.position = new Vector3(x, 15.34f, 2.09f);
+                    tubeAdapter.transform.localPosition = new Vector3(0, -0.075f, 0f);
                     
                 }
                 else if (_selectedOption.Contains("15"))
@@ -111,7 +111,7 @@ public class ButtonsClickAction : MonoBehaviour
                     tube = Instantiate(tube15);
                     tube.transform.position = new Vector3(x, 18.46f, 2.04f);
                     tubeAdapter = Instantiate(tubeAdapter15, tube.transform, true);
-                    tubeAdapter.transform.position = new Vector3(x, 15.29f, 2.09f);
+                    tubeAdapter.transform.localPosition = new Vector3(0f, -0.073f, 0.0023f);
 
                 }
 

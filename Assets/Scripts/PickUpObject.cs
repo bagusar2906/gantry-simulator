@@ -65,7 +65,7 @@ public class PickUpObject : MonoBehaviour
         mousePosition.z = pickUpDistance; // Set the distance from the camera
         var targetPosition = mainCamera.ScreenToWorldPoint(mousePosition);
         var position = pickedObject.transform.position;
-        targetPosition.z = position.z;
+        targetPosition.y = position.y;
         // Smoothly move the object to the target position
         position = Vector3.Lerp(position, targetPosition, Time.deltaTime * 10f);
         pickedObject.transform.position = position;
