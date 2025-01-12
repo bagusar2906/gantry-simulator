@@ -97,26 +97,22 @@ public class ButtonsClickAction : MonoBehaviour
                 Debug.Log($"Tube: {_selectedOption} ml");
                 GameObject tubeAdapter;
                 GameObject tube;
-                LiquidControl liquidControl;
                 var x = MenuOwner.name.Contains("Left") ? 1.45f : -1.47f;
                 if (_selectedOption.Contains("50"))
                 {
-                    tubeAdapter = Instantiate(tubeAdapter50);
-
-                    tubeAdapter.transform.position = new Vector3(x, 15.34f, 2.09f);
                     tube = Instantiate(tube50);
                     tube.transform.position = new Vector3(x, 18.501f, 2.09f);
-                    liquidControl = tube.GetComponentInChildren<LiquidControl>();
-                    liquidControl.SetVolume(LiquidType.Sample, 0f);
+                    tubeAdapter = Instantiate(tubeAdapter50, tube.transform, true);
+                    tubeAdapter.transform.position = new Vector3(x, 15.34f, 2.09f);
+                    
                 }
                 else if (_selectedOption.Contains("15"))
                 {
-                    tubeAdapter = Instantiate(tubeAdapter15);
-                    tubeAdapter.transform.position = new Vector3(x, 15.29f, 2.09f);
                     tube = Instantiate(tube15);
                     tube.transform.position = new Vector3(x, 18.46f, 2.04f);
-                    liquidControl = tube.GetComponentInChildren<LiquidControl>();
-                    liquidControl.SetVolume(LiquidType.Sample, 0f);
+                    tubeAdapter = Instantiate(tubeAdapter15, tube.transform, true);
+                    tubeAdapter.transform.position = new Vector3(x, 15.29f, 2.09f);
+
                 }
 
                 Destroy(ContextMenu);

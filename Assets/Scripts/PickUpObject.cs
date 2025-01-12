@@ -40,9 +40,8 @@ public class PickUpObject : MonoBehaviour
     {
         // Cast a ray from the camera to the mouse position
         var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out var hit))
         {
             // Check if the object has a Rigidbody and is movable
             var rb = hit.collider.GetComponent<Rigidbody>();
@@ -50,7 +49,11 @@ public class PickUpObject : MonoBehaviour
             {
                 pickedObject = hit.collider.gameObject;
                 rb.useGravity = false; // Disable gravity while picked up
-              
+                foreach (var child in pickedObject.GetComponentsInChildren<Rigidbody>())
+                {
+                   
+                    child.isKinematic = true;
+                }
             }
         }
     }
@@ -75,6 +78,11 @@ public class PickUpObject : MonoBehaviour
         if (rb != null)
         {
             rb.useGravity = true; // Re-enable gravity
+            foreach (var child in pickedObject.GetComponentsInChildren<Rigidbody>())
+            {
+                //child.useGravity = true;
+                child.isKinematic = false;
+            }
         }
         pickedObject = null;
     }
