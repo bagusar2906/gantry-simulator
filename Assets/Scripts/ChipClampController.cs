@@ -1,13 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using EventArgs;
+using UnityEngine;
 
 
 public class ChipClampController : MonoBehaviour
 {
     public GameObject fingerA;
     public GameObject fingerB;
+    
+    public event EventHandler<ChipClampStateChangedEventArgs> OnChipClampStateChanged
+    {
+        add => _clampOnTouch.OnChipClampStateChanged += value;
+        remove => _clampOnTouch.OnChipClampStateChanged -= value;
+    }
 
-    PincherFingerController fingerAController;
-    PincherFingerController fingerBController;
+    PincherFingerController _fingerAController;
+    PincherFingerController _fingerBController;
+    private ClampOnTouch _clampOnTouch;
 
     // Grip - the extent to which the pincher is closed. 0: fully open, 1: fully closed.
     public float grip;
@@ -18,8 +27,9 @@ public class ChipClampController : MonoBehaviour
 
     void Start()
     {
-        fingerAController = fingerA.GetComponent<PincherFingerController>();
-        fingerBController = fingerB.GetComponent<PincherFingerController>();
+        _fingerAController = fingerA.GetComponent<PincherFingerController>();
+        _fingerBController = fingerB.GetComponent<PincherFingerController>();
+        _clampOnTouch = GetComponentInChildren<ClampOnTouch>();
         CurrentState = GripState.Opened;
     }
 
@@ -35,7 +45,7 @@ public class ChipClampController : MonoBehaviour
     public float CurrentGrip()
     {
         // TODO - we can't really assume the fingers agree, need to think about that
-        float meanGrip = (fingerAController.CurrentGrip() + fingerBController.CurrentGrip()) / 2.0f;
+        float meanGrip = (_fingerAController.CurrentGrip() + _fingerBController.CurrentGrip()) / 2.0f;
         return meanGrip;
     }
 
@@ -45,7 +55,7 @@ public class ChipClampController : MonoBehaviour
         /* Gets the point directly between the middle of the pincher fingers,
          * in the global coordinate system.      
          */
-        Vector3 localCenterPoint = (fingerAController.GetOpenPosition() + fingerBController.GetOpenPosition()) / 2.0f;
+        Vector3 localCenterPoint = (_fingerAController.GetOpenPosition() + _fingerBController.GetOpenPosition()) / 2.0f;
         Vector3 globalCenterPoint = transform.TransformPoint(localCenterPoint);
         return globalCenterPoint;
     }
@@ -56,8 +66,8 @@ public class ChipClampController : MonoBehaviour
     public void ResetGripToOpen()
     {
         grip = 0.0f;
-        fingerAController.ForceOpen(transform);
-        fingerBController.ForceOpen(transform);
+        _fingerAController.ForceOpen(transform);
+        _fingerBController.ForceOpen(transform);
         gripState = GripState.Fixed;
     }
 
@@ -74,8 +84,8 @@ public class ChipClampController : MonoBehaviour
 
     void UpdateFingersForGrip()
     {
-        fingerAController.UpdateGrip(grip);
-        fingerBController.UpdateGrip(grip);
+        _fingerAController.UpdateGrip(grip);
+        _fingerBController.UpdateGrip(grip);
     }
 
 

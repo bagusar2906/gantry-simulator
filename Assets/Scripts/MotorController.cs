@@ -1,6 +1,6 @@
 ﻿using System;
 using Enums;
-using SimulatorClient.EventArgs;
+using EventArgs;
 using UnityEngine;
 
 public class MotorController : MonoBehaviour
@@ -142,7 +142,7 @@ public class MotorController : MonoBehaviour
         MotionAbortEnabled = false;
     }
    
-    public void StopMove()
+    public void StopMove(short motorId)
     {
         moveState = MotorState.Fixed;
     }

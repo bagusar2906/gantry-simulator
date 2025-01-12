@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 6053015686951805488}
   - component: {fileID: 1994309176873907229}
   - component: {fileID: 1596367719562286896}
+  - component: {fileID: 536556854027318774}
   m_Layer: 0
   m_Name: 1_5mLTube
   m_TagString: Selectable
@@ -237,3 +238,16 @@ CapsuleCollider:
   m_Height: 0.10096468
   m_Direction: 1
   m_Center: {x: -0.000000004656613, y: -0.034059644, z: 0.0000000018626451}
+--- !u!114 &536556854027318774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8720814330493247306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebfe2d815d1fdf8499e95225f0f423f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tubeType: 0

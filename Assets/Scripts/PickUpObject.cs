@@ -17,7 +17,7 @@ public class PickUpObject : MonoBehaviour
     void Update()
     {
         // Handle mouse click
-        if (Input.GetMouseButtonDown((int)MouseButton.LeftMouse)) // Left mouse button
+        if (Input.GetKeyDown(KeyCode.P)) // Left mouse button
         {
             if (pickedObject == null)
             {

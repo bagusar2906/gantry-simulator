@@ -1,4 +1,4 @@
-namespace SimulatorClient.EventArgs
+namespace EventArgs
 {
   public class MotorMoveStartedEventArgs : System.EventArgs
   {

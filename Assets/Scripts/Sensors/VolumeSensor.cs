@@ -12,34 +12,34 @@ namespace Sensors
         {
             if (!other.CompareTag("Selectable"))
                 return;
-            _liquidControl = other.gameObject.GetComponentInChildren<LiquidControl>();
+            _tube = other.gameObject.GetComponent<Tube>();
         }
 
         private void OnCollisionEnter(Collision collision)
         {
             if (!collision.gameObject.name.Contains("TubeAdapter"))
                 return;
-            _liquidControl = collision.gameObject.GetComponentInChildren<LiquidControl>();   
+            _tube = collision.gameObject.GetComponentInChildren<Tube>();   
         }
 
         private void OnCollisionExit(Collision other)
         {
-            _liquidControl = null;
+            _tube = null;
         }
 
         private void OnTriggerExit(Collider other)
         {
-            _liquidControl = null;
+            _tube = null;
         }
         
 
         public VolumeSensorEnum id;
 
-        [CanBeNull] private LiquidControl _liquidControl;
+        [CanBeNull] private Tube _tube;
 
         public void UpdateVolume(float volume)
         {
-            if (_liquidControl != null) _liquidControl.volume = volume;
+            if (_tube != null) _tube.Fill(volume);
         }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 public class ClampOnTouch : MonoBehaviour
 {
     
-    public event EventHandler<OnChipClampStateChangedEventArgs> OnChipClampStateChanged;
+    public event EventHandler<ChipClampStateChangedEventArgs> OnChipClampStateChanged;
     private Renderer _objectRenderer;
 
     // Start is called before the first frame update
@@ -18,7 +18,7 @@ public class ClampOnTouch : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         _objectRenderer.material.color = Color.red;
-        OnChipClampStateChanged?.Invoke(this, new OnChipClampStateChangedEventArgs()
+        OnChipClampStateChanged?.Invoke(this, new ChipClampStateChangedEventArgs()
         {
             State = ClampState.Clamp
         });
@@ -27,7 +27,7 @@ public class ClampOnTouch : MonoBehaviour
     private void OnCollisionExit(Collision other)
     {
         _objectRenderer.material.color = Color.green;
-        OnChipClampStateChanged?.Invoke(this, new OnChipClampStateChangedEventArgs()
+        OnChipClampStateChanged?.Invoke(this, new ChipClampStateChangedEventArgs()
         {
             State = ClampState.UnClamp
         });

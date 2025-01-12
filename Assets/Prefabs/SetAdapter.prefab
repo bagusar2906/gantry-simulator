@@ -1552,6 +1552,8 @@ MonoBehaviour:
   volumeInput: {fileID: 0}
   chipClamp: {fileID: 0}
   tubeAdapter50: {fileID: 9025628704415854473, guid: 97b4c3ba7ba68a7478844281f703c275, type: 3}
-  tube50: {fileID: 1808329207757848549, guid: 79040e39652c403479a5ffcd68e8b8dd, type: 3}
+  tube50: {fileID: 5752346321172954057, guid: 63d09ebd87ba33e4d8c40470976e0cec, type: 3}
   tubeAdapter15: {fileID: 1530669958586652702, guid: f467b7578b2a158488dce2520229b686, type: 3}
   tube15: {fileID: 6523292529649882941, guid: 413df05baca133b4f89c661f04b622d8, type: 3}
+  menuType: 0
+  peristalticPump: {fileID: 0}

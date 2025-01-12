@@ -1,6 +1,6 @@
-namespace SimulatorClient.EventArgs
+namespace EventArgs
 {
-    public class OnChipClampErrorEventArgs
+    public class ChipClampErrorEventArgs
     {
         public short Operation { get; set; }
         public short State { get; set; }

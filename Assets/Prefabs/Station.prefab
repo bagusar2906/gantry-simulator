@@ -819,7 +819,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 819
+  m_VersionIndex: 822
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -1375,6 +1375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1429893153029682810}
   - component: {fileID: 79556066133399292}
+  - component: {fileID: 6510194479960153047}
   m_Layer: 0
   m_Name: Station
   m_TagString: Untagged
@@ -1412,6 +1413,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 4119064999089314409}
+--- !u!114 &6510194479960153047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548426415748985515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dd3071d0ca043efabf77461de137d17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  busId: 5
+  stationId: 1
+  chipClamp: {fileID: 5710556726794817704}
+  peristalticPump: {fileID: 413846147219702919}
+  leftLoadCell: {fileID: 1292130085862502842}
+  lowVolumeLoadCell: {fileID: 4119064999089314409}
+  rightLoadCell: {fileID: 8344629835854094687}
 --- !u!1 &2317772310174306872
 GameObject:
   m_ObjectHideFlags: 0
@@ -6842,6 +6862,7 @@ MonoBehaviour:
   moveState: 0
   speed: 5
   target: {fileID: 0}
+  maxTravelLimit: 0
 --- !u!114 &2391554434245521337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7972,6 +7993,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8478261407785620748}
     m_Modifications:
+    - target: {fileID: 1547694850603164613, guid: 9cfcad7010bf63a4ebe343289a58b5a9, type: 3}
+      propertyPath: m_VersionIndex
+      value: 822
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033936410142804046, guid: 9cfcad7010bf63a4ebe343289a58b5a9, type: 3}
+      propertyPath: m_VersionIndex
+      value: 822
+      objectReference: {fileID: 0}
     - target: {fileID: 5288855748010274439, guid: 9cfcad7010bf63a4ebe343289a58b5a9, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -8028,5 +8057,10 @@ PrefabInstance:
 --- !u!4 &79486650086504135 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5288855748010274439, guid: 9cfcad7010bf63a4ebe343289a58b5a9, type: 3}
+  m_PrefabInstance: {fileID: 5224086403803371584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &413846147219702919 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5603014529028201671, guid: 9cfcad7010bf63a4ebe343289a58b5a9, type: 3}
   m_PrefabInstance: {fileID: 5224086403803371584}
   m_PrefabAsset: {fileID: 0}
