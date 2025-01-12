@@ -125,8 +125,8 @@ public class ButtonsClickAction : MonoBehaviour
             case ContextMenuType.VolumeSetter:
             {
                 var volume = volumeInput.GetComponentInChildren<InputField>();
-                var liquid = MenuOwner.GetComponentInChildren<LiquidControl>();
-                liquid.SetVolume(LiquidType.Sample, float.Parse(volume.text));
+                var tube = MenuOwner.GetComponentInChildren<Tube>();
+                tube.Fill(LiquidType.Sample, float.Parse(volume.text));
                 Debug.Log($"Set Volume: {volume.text}");
                 Destroy(ContextMenu);
                 break;

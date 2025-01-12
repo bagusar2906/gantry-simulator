@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volume: 0
-  offset: 0.0889
-  scale: 0
+  offset: -3.815
+  scale: 0.0889
   liquidColor: {r: 0.050980393, g: 0.14509805, b: 0.9529412, a: 0}
   surfaceColor: {r: 0.28627452, g: 0.99215686, b: 0.9843137, a: 0}
 --- !u!1 &5752346321172954057
@@ -252,6 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tubeType: 2
+  volumeLabel: {fileID: 2064962446727197929}
 --- !u!136 &3729335634599671285
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -457,7 +458,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8340838155233602008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3113ad02a2a65124a96d06442f7e5b09, type: 3}
+  m_Script: {fileID: 11500000, guid: 90fbc4097f9e585439033b8aae8a11b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: -0.5, y: 2, z: 2}
+  offset: {x: -0.5, y: 2, z: 1}
