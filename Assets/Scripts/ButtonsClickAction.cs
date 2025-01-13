@@ -121,7 +121,7 @@ public class ButtonsClickAction : MonoBehaviour
                     tube = Instantiate(tube1_5);
                     tube.transform.position = new Vector3(-0.01f, 18.92f, 2.01f);
                     tubeAdapter = Instantiate(tubeAdapter1_5, tube.transform, true);
-                    tubeAdapter.transform.localPosition = new Vector3(0f, -0.073f, 0f);
+                    tubeAdapter.transform.localPosition = new Vector3(0.0014f, -0.073f, 0.0013f);
 
                 }
 

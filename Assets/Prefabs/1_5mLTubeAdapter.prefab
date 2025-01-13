@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2352706419895746420}
   - component: {fileID: 5310366615913749419}
   - component: {fileID: 5167791128020369892}
-  - component: {fileID: 3799260756048756648}
   m_Layer: 0
   m_Name: 1_5mLTubeAdapter
   m_TagString: Untagged
@@ -113,27 +112,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &3799260756048756648
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 679725135229640969}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.017101945, y: 0.10096467, z: 0.017090792}
-  m_Center: {x: -0.000000004656613, y: -0.03405964, z: 0.0000000018626451}
 --- !u!1 &3908477899993739790
 GameObject:
   m_ObjectHideFlags: 0

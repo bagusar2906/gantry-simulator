@@ -2858,7 +2858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaf44d8be2fe4d90bcd6bf2153bd0c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpDistance: 20
+  pickUpDistance: {x: 0, y: 20, z: 2}
 --- !u!1 &874195820
 GameObject:
   m_ObjectHideFlags: 0
