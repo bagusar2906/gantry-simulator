@@ -103,9 +103,9 @@ public class ButtonsClickAction : MonoBehaviour
                 if (_selectedOption.Contains("50"))
                 {
                     tube = Instantiate(tube50);
-                    tube.transform.position = new Vector3(x, 18.501f, 2.09f);
+                    tube.transform.position = new Vector3(x, 19.401f, 2.09f);
                     tubeAdapter = Instantiate(tubeAdapter50, tube.transform, true);
-                    tubeAdapter.transform.localPosition = new Vector3(0, -0.075f, 0f);
+                    tubeAdapter.transform.localPosition = new Vector3(0, -0.0754f, 0f);
                     
                 }
                 else if (_selectedOption.Contains("15"))

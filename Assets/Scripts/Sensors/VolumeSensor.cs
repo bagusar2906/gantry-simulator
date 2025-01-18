@@ -10,25 +10,29 @@ namespace Sensors
         
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Selectable"))
-                return;
-            _tube = other.gameObject.GetComponent<Tube>();
+            var  tube = other.gameObject.GetComponentInParent<Tube>();
+            if (tube == null) return;
+            _tube = tube;
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (!collision.gameObject.name.Contains("TubeAdapter"))
-                return;
-            _tube = collision.gameObject.GetComponentInChildren<Tube>();   
+            var  tube = collision.gameObject.GetComponentInParent<Tube>();
+            if (tube == null) return;
+            _tube = tube;
         }
 
         private void OnCollisionExit(Collision other)
         {
+            var  tube = other.gameObject.GetComponentInParent<Tube>();
+            if (tube == null) return;
             _tube = null;
         }
 
         private void OnTriggerExit(Collider other)
         {
+            var  tube = other.gameObject.GetComponentInParent<Tube>();
+            if (tube == null) return;
             _tube = null;
         }
         
