@@ -79,11 +79,24 @@ namespace SimulatorHub
 
             foreach (var pulseStation in _stationsMap.Values)
             {
+                pulseStation.InitialWeightChanged += (sender, args) =>
+                {
+                    var dto = new LoadCellValueDto()
+                    {
+                        id = args.Id,
+                        busId = pulseStation.busId,
+                        weight = args.Weight,
+                        stationId = pulseStation.stationId
+                    };
+                    var json = JsonUtility.ToJson(dto);
+                    _signalR.Invoke(EventHandlers.OnWeightChanged, json);
+                };
+                
                 pulseStation.MotorMoveDone += (sender, args) =>
                 {
                     var dto = new MoveDoneDto()
                     {
-                        busId = args.BusId,
+                        busId = pulseStation.busId,
                         motorId = args.MotorID,
                         status = args.Status,
                         position = args.Position,
@@ -97,7 +110,7 @@ namespace SimulatorHub
                 {
                     var dto = new HomeDoneDto()
                     {
-                        busId = args.BusId,
+                        busId = pulseStation.busId,
                         motorId = args.MotorID,
                         position = args.Position,
                         stationId = pulseStation.stationId
@@ -110,7 +123,7 @@ namespace SimulatorHub
                 {
                     var dto = new MotorErrorDto()
                     {
-                        busId = args.BustId,
+                        busId = pulseStation.busId,
                         stationId = pulseStation.stationId,
                         motorId = args.MotorID,
                         errorCode = args.MotorErrorCode
@@ -123,7 +136,7 @@ namespace SimulatorHub
                 {
                     var dto = new StateChangedDto()
                     {
-                        busId = args.BusId,
+                        busId = pulseStation.busId,
                         state = (short)args.State,
                         stationId = pulseStation.stationId
                     };

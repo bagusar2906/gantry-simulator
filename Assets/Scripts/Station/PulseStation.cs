@@ -19,7 +19,22 @@ namespace Station
         public GameObject lowVolumeLoadCell;
         public GameObject rightLoadCell;
         
-        
+        public event EventHandler<LoadCellValueChangedEventArgs> InitialWeightChanged
+        {
+            add
+            {
+                _volumeSensors[VolumeSensorEnum.Left].OnInitialWeightChanged += value;
+                _volumeSensors[VolumeSensorEnum.LowVolume].OnInitialWeightChanged += value;
+                _volumeSensors[VolumeSensorEnum.Right].OnInitialWeightChanged += value;
+            }
+            remove
+            {
+                _volumeSensors[VolumeSensorEnum.Left].OnInitialWeightChanged -= value;
+                _volumeSensors[VolumeSensorEnum.LowVolume].OnInitialWeightChanged -= value;
+                _volumeSensors[VolumeSensorEnum.Right].OnInitialWeightChanged -= value;
+            }
+        }
+
         public event EventHandler<MotorMoveDoneEventArgs> MotorMoveDone
         {
             add => _motorController.MotorMoveDone += value;
@@ -92,12 +107,12 @@ namespace Station
         public void UpdateVolumeSensor(short sensorId, double volume)
         {
             if (_volumeSensors.TryGetValue((VolumeSensorEnum)sensorId, out var volumeSensor))
-                volumeSensor.UpdateVolume((float)volume);
+                volumeSensor.UpdateWeight((float)volume);
         }
 
         public void StopMove(short motorId)
         {
-            _motorController.StopMove(motorId);
+            _motorController.StopMove();
         }
 
         public void MoveVel(short motorId, double velocity, bool isForward)
@@ -107,7 +122,7 @@ namespace Station
 
         public void ClearMotorFault(short motorId)
         {
-            _motorController.ClearFault(motorId);
+            _motorController.ClearFault();
         }
 
         public void MoveSlider(short state)
