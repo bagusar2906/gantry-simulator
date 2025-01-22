@@ -6144,7 +6144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 376455802042535338, guid: 0415b69312406f34da36223822893765, type: 3}
       propertyPath: maxTravelLimit
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 478612689330967797, guid: 0415b69312406f34da36223822893765, type: 3}
       propertyPath: closedZ
@@ -6252,7 +6252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1792389463952747952, guid: 0415b69312406f34da36223822893765, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.4
+      value: 6.2
       objectReference: {fileID: 0}
     - target: {fileID: 1919558080981406936, guid: 0415b69312406f34da36223822893765, type: 3}
       propertyPath: m_Mesh
@@ -6313,6 +6313,10 @@ PrefabInstance:
     - target: {fileID: 5710556726794817704, guid: 0415b69312406f34da36223822893765, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 5778571666053559642, guid: 0415b69312406f34da36223822893765, type: 3}
+      propertyPath: m_ParentAnchorPosition.y
+      value: 0.19610177
       objectReference: {fileID: 0}
     - target: {fileID: 5778571666053559642, guid: 0415b69312406f34da36223822893765, type: 3}
       propertyPath: m_ParentAnchorPosition.z
@@ -6394,6 +6398,10 @@ PrefabInstance:
       propertyPath: m_ParentAnchorPosition.x
       value: 0.014999995
       objectReference: {fileID: 0}
+    - target: {fileID: 7460607029282229826, guid: 0415b69312406f34da36223822893765, type: 3}
+      propertyPath: m_ParentAnchorPosition.y
+      value: 6.400001
+      objectReference: {fileID: 0}
     - target: {fileID: 7659469284295613274, guid: 0415b69312406f34da36223822893765, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.75
@@ -6401,6 +6409,10 @@ PrefabInstance:
     - target: {fileID: 7693129038050098702, guid: 0415b69312406f34da36223822893765, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7970668833216873714, guid: 0415b69312406f34da36223822893765, type: 3}
+      propertyPath: m_ParentAnchorPosition.y
+      value: 0.19610177
       objectReference: {fileID: 0}
     - target: {fileID: 7970668833216873714, guid: 0415b69312406f34da36223822893765, type: 3}
       propertyPath: m_ParentAnchorPosition.z

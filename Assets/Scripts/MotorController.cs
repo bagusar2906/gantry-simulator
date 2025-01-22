@@ -17,6 +17,7 @@ public class MotorController : MonoBehaviour
     public double targetPosition;
     private bool _isHoming ;
     public bool MotionAbortEnabled { get; set; }
+    private bool _isMotionAbortTriggered;
 
     public event EventHandler<MotorHomeDoneEventArgs> MotorHomeDone;
     public event EventHandler<MotorMoveStartedEventArgs> MotorMoveStarted;
@@ -44,7 +45,23 @@ public class MotorController : MonoBehaviour
        
         //increment this y position
         var target = _currentPos + (float)moveState * Time.fixedDeltaTime * speed;
-       // target = Mathf.Clamp(target, 0f, maxTravelLimit);
+        /*target = moveState == MotorState.MovingUp
+            ? Mathf.Clamp(target, _currentPos, (float)targetPosition)
+            : Mathf.Clamp(target, (float)targetPosition, _currentPos);*/
+
+        if (_currentPos >= targetPosition && moveState == MotorState.MovingUp && _isMotionAbortTriggered)
+        {
+            moveState = MotorState.Fixed;
+            MotorErrorOccured?.Invoke(this, new MotorErrorOccuredEventArgs()
+            {
+                BustId = _busId,
+                MotorID = _motorId,
+                Position = CurrentPos,
+                MotorErrorCode = (ushort)MotorErrorEnum.MotionAbort
+            });
+            Debug.Log($"Motor stop due to collision, pos: {CurrentPos}");
+        }
+        
         if (target >= targetPosition && moveState == MotorState.MovingUp )
         {
             moveState = MotorState.Fixed;
@@ -82,34 +99,34 @@ public class MotorController : MonoBehaviour
                 Status = 0
             });
             Debug.Log($"Move Done: id:{_motorId}, pos:{CurrentPos}");
-            return;
+            
         }
-
+        
         //set joint Drive to new position
         var drive = articulation.yDrive;
         drive.target = target;
         articulation.yDrive = drive;
+
+
+       
     }
+    
 
-   
-
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (!MotionAbortEnabled)
             return;
+        _isMotionAbortTriggered = true;
         // Check if we've touched the target
-       // moveState = MotorState.Fixed;
+        
        //not immediate stop to simulate real movement
-       speed *= 0.1f;
-       targetPosition = _currentPos + 0.3f;
-        MotorErrorOccured?.Invoke(this, new MotorErrorOccuredEventArgs()
-        {
-            BustId = _busId,
-            MotorID = _motorId,
-            Position = CurrentPos,
-            MotorErrorCode = (ushort)MotorErrorEnum.MotionAbort
-        });
-        Debug.Log("Target touched!");
+       speed *= 0.2f;
+       const float overshoot = 1f;
+       targetPosition = _currentPos + overshoot.ToNative(scale, offset);
+
+       var targetPosEng = ((float)targetPosition).ToEng(scale, offset);
+       Debug.Log($"Collision occured at {CurrentPos}.  it will stop at pos: {targetPosEng}");
 
     }
 
@@ -125,7 +142,7 @@ public class MotorController : MonoBehaviour
     {
      
         if (moveState != MotorState.Fixed) return;
-        
+      
         targetPosition = Mathf.Clamp(((float)destination).ToNative(scale,  offset) , 0f, maxTravelLimit);
         speed = (float)(0.015 * velocity);
         _busId = busId;
@@ -161,6 +178,7 @@ public class MotorController : MonoBehaviour
     public void ClearFault()
     {
         MotionAbortEnabled = false;
+        _isMotionAbortTriggered = false;
     }
    
     public void StopMove()
@@ -172,6 +190,7 @@ public class MotorController : MonoBehaviour
     {
         if (moveState != MotorState.Fixed) return;
         Debug.Log($"Homing Started: id:{_motorId}");
+        _isMotionAbortTriggered = false;
         targetPosition = 0;
         speed = homeVelocity / 100;
         _busId = busId;
