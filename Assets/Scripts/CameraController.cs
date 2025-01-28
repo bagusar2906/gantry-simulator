@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
   {
 
     var pVelocity = new Vector3();
-    if (Input.GetMouseButton((int)MouseButton.RightMouse))
+    if (Input.GetMouseButton((int)MouseButton.LeftMouse))
     {
 
       transform.eulerAngles = _lastMouse;
