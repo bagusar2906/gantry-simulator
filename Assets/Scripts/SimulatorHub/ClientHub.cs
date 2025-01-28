@@ -151,7 +151,7 @@ namespace SimulatorHub
         private void SetMotionAbortAction(string request)
         {
             var dto = JsonUtility.FromJson<SetMotionAbortDto>(request);
-            _stationsMap[dto.stationId].MotionAbortEnabled = dto.enableMask > 0;
+            _stationsMap[dto.stationId].SetMotionAbort(dto.motorId, dto.enableMask > 0) ;
         }
 
         private void ClampChipAction(string request)

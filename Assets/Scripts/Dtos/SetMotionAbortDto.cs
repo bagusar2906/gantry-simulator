@@ -3,7 +3,7 @@ using System;
 namespace DTOs
 {
     [Serializable]
-    public class SetMotionAbortDto: StationBaseDto
+    public class SetMotionAbortDto: MotorBaseDto
     {
         public uint enableMask;
     }

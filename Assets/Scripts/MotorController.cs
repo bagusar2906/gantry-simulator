@@ -3,9 +3,8 @@ using Enums;
 using EventArgs;
 using Extensions;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class MotorController : MonoBehaviour
+public class MotorController : MonoBehaviour, IMotorSim
 {
     private short _busId;
     private short _motorId;
@@ -172,8 +171,17 @@ public class MotorController : MonoBehaviour
             moveState = MotorState.Fixed;
         }
     }
-    
-    
+
+    public ushort MoveVel(short busId, short motorId, double vel, bool forward)
+    {
+        return 0;
+    }
+
+    public void AbortMotor()
+    {
+        
+    }
+
 
     public void ClearFault()
     {

@@ -5877,7 +5877,7 @@ PrefabInstance:
       objectReference: {fileID: 186107387}
     - target: {fileID: 4327430081996843230, guid: d2e2bfdc145d16a4d96c73f50d488c99, type: 3}
       propertyPath: m_Constraints
-      value: 112
+      value: 122
       objectReference: {fileID: 0}
     - target: {fileID: 6145616266094742255, guid: d2e2bfdc145d16a4d96c73f50d488c99, type: 3}
       propertyPath: m_Mesh

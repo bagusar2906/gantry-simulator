@@ -37,19 +37,43 @@ namespace Station
 
         public event EventHandler<MotorMoveDoneEventArgs> MotorMoveDone
         {
-            add => _motorController.MotorMoveDone += value;
-            remove => _motorController.MotorMoveDone -= value;
+            add
+            {
+                _motorController[0].MotorMoveDone += value;
+                _motorController[1].MotorMoveDone += value;
+            }
+            remove
+            {
+                _motorController[0].MotorMoveDone -= value;
+                _motorController[1].MotorMoveDone -= value;
+            }
         }
         public event EventHandler<MotorHomeDoneEventArgs> MotorHomeDone
         {
-            add => _motorController.MotorHomeDone += value;
-            remove => _motorController.MotorHomeDone -= value;
+            add
+            {
+                _motorController[0].MotorHomeDone += value;
+                _motorController[1].MotorHomeDone += value;
+            }
+            remove
+            {
+                _motorController[0].MotorHomeDone -= value;
+                _motorController[1].MotorHomeDone -= value;
+            }
         }
         
         public event EventHandler<MotorErrorOccuredEventArgs> MotorErrorOccured
         {
-            add => _motorController.MotorErrorOccured += value;
-            remove => _motorController.MotorErrorOccured -= value;
+            add
+            {
+                _motorController[0].MotorErrorOccured += value;
+                _motorController[1].MotorErrorOccured += value;
+            }
+            remove
+            {
+                _motorController[0].MotorErrorOccured -= value;
+                _motorController[1].MotorErrorOccured -= value;
+            }
         }
         
         public event EventHandler<ChipClampStateChangedEventArgs> OnChipClampStateChanged
@@ -58,36 +82,49 @@ namespace Station
             remove => _chipClampController.OnChipClampStateChanged -= value;
         }
         
-        private PeristalticPump _pumpController;
+        
         private ChipClampController _chipClampController;
-        private MotorController _motorController;
+      
 
         private IDictionary<VolumeSensorEnum, VolumeSensor> _volumeSensors;
-        
-        public bool MotionAbortEnabled
+        private IDictionary<short, IMotorSim> _motorController;
+
+        public void SetMotionAbort(short motorId, bool state)
         {
-            get => _motorController.MotionAbortEnabled;
-            set => _motorController.MotionAbortEnabled = value ; 
+            if (_motorController.TryGetValue(motorId, out var motor))
+                motor.MotionAbortEnabled = state;
         }
 
+        public bool GetMotionAbort(short motorId)
+        {
+            return _motorController.TryGetValue(motorId, out var motor) 
+                   && motor.MotionAbortEnabled;
+        }
         // Start is called before the first frame update
         void Start()
         {
           
-            _pumpController = peristalticPump.GetComponentInChildren<PeristalticPump>();
+            var pumpMotor = peristalticPump.GetComponentInChildren<PeristalticPump>();
             _chipClampController = chipClamp.GetComponent<ChipClampController>();
-            _motorController = lowVolumeLoadCell.GetComponentInChildren<MotorController>();
+            var lvMotor = lowVolumeLoadCell.GetComponentInChildren<MotorController>();
           
             _volumeSensors = new Dictionary<VolumeSensorEnum, VolumeSensor>();
             _volumeSensors[VolumeSensorEnum.Left] = leftLoadCell.GetComponentInChildren<VolumeSensor>();
             _volumeSensors[VolumeSensorEnum.LowVolume] = lowVolumeLoadCell.GetComponentInChildren<VolumeSensor>();
             _volumeSensors[VolumeSensorEnum.Right] = rightLoadCell.GetComponentInChildren<VolumeSensor>();
+
+            _motorController = new Dictionary<short, IMotorSim>()
+            {
+                { 0, pumpMotor },
+                { 1, lvMotor }
+            };
         }
         
 
         public void MoveAbs(short motorId, double velocity, double targetPosition)
         {
-            _motorController.MoveAbs(busId, motorId, velocity, targetPosition);
+            if (_motorController.TryGetValue(motorId, out var motor))
+             motor.MoveAbs(busId, motorId, velocity, targetPosition);
         }
 
         public void ClampChip(short clampState)
@@ -101,7 +138,8 @@ namespace Station
 
         public void Home(short motorId, float velocity)
         {
-            _motorController.Home(busId, motorId, velocity);
+            if (_motorController.TryGetValue(motorId, out var motor))
+                motor.Home(busId, motorId, velocity);
         }
 
         public void UpdateVolumeSensor(short sensorId, double volume)
@@ -112,17 +150,20 @@ namespace Station
 
         public void StopMove(short motorId)
         {
-            _motorController.StopMove();
+            if (_motorController.TryGetValue(motorId, out var motor))
+                motor.StopMove();
         }
 
         public void MoveVel(short motorId, double velocity, bool isForward)
         {
-            _pumpController.MoveVel(busId, motorId, velocity, isForward);
+            if (_motorController.TryGetValue(motorId, out var motor))
+                motor.MoveVel(busId, motorId, velocity, isForward);
         }
 
         public void ClearMotorFault(short motorId)
         {
-            _motorController.ClearFault();
+            if (_motorController.TryGetValue(motorId, out var motor))
+                motor.ClearFault();
         }
 
         public void MoveSlider(short state)
