@@ -1,4 +1,6 @@
 ﻿using System;
+using Clamp;
+using Enums;
 using EventArgs;
 using UnityEngine;
 
@@ -25,6 +27,14 @@ public class ChipClampController : MonoBehaviour
 
     public GripState CurrentState { get; private set; }
 
+    public void ClampChip(ClampState clampState)
+    {
+        if (CurrentState is GripState.Opening or GripState.Closing) 
+            return;
+        gripState = clampState == ClampState.Clamp ?
+            GripState.Closing
+            : GripState.Opening;
+    }
     void Start()
     {
         _fingerAController = fingerA.GetComponent<PincherFingerController>();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Enums;
 using EventArgs;
 using Sensors;
 using SimulatorHub;
@@ -129,11 +130,8 @@ namespace Station
 
         public void ClampChip(short clampState)
         {
-            if (_chipClampController.gripState is GripState.Opening or GripState.Closing) 
-                return;
-            _chipClampController.gripState = clampState == 1 ?
-                 GripState.Closing
-                : GripState.Opening;
+            _chipClampController.ClampChip(clampState == 1 ? ClampState.Clamp 
+                : ClampState.UnClamp);
         }
 
         public void Home(short motorId, float velocity)
