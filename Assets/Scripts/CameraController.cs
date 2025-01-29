@@ -36,13 +36,13 @@ public class CameraController : MonoBehaviour
   {
 
     var pVelocity = new Vector3();
-    if (Input.GetMouseButton((int)MouseButton.LeftMouse))
+    /*if (Input.GetMouseButton((int)MouseButton.LeftMouse))
     {
 
       transform.eulerAngles = _lastMouse;
 
       return pVelocity;
-    }
+    }*/
 
     if (Input.GetKey(KeyCode.W))
     {
