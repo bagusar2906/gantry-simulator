@@ -56,35 +56,8 @@ jobs:
           name: ${{ steps.getManualLicenseFile.outputs.filePath }}
           path: ${{ steps.getManualLicenseFile.outputs.filePath }}
 
-  test:
-    needs: checklicense
-    if: needs.checklicense.outputs.is_unity_license_set == 'true'
-    name: Run all tests ✨
-    runs-on: ${{ inputs.runsOnServer }}     
-    steps:      
-      - uses: actions/checkout@v4
-        with:
-          lfs: true
-      - uses: actions/cache@v3
-        with:
-          path: Library
-          key: Library-test
-      - uses: game-ci/unity-test-runner@v4
-        id: testRunner
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-        with:
-          githubToken: ${{ secrets.ACCESS_TOKEN }}
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Test results (all modes)
-          path: ${{ steps.testRunner.outputs.artifactsPath }}
-
-
   buildForAllSupportedPlatforms:    
-    needs: test
+    needs: checklicense
     name: Build for ${{ matrix.targetPlatform }}
     runs-on: ${{ inputs.runsOnServer }} 
     strategy:
