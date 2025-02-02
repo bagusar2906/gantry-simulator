@@ -17,7 +17,8 @@ public class ClampOnTouch : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        _objectRenderer.material.color = Color.red;
+        _objectRenderer.material.color = collision.gameObject.name.StartsWith("Chip") ?
+            Color.red : Color.green;
         OnChipClampStateChanged?.Invoke(this, new ChipClampStateChangedEventArgs()
         {
             State = ClampState.Clamp
@@ -26,7 +27,7 @@ public class ClampOnTouch : MonoBehaviour
 
     private void OnCollisionExit(Collision other)
     {
-        _objectRenderer.material.color = Color.green;
+        
         OnChipClampStateChanged?.Invoke(this, new ChipClampStateChangedEventArgs()
         {
             State = ClampState.UnClamp
