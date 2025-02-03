@@ -19,66 +19,6 @@
   </style>
   <!-- <script src="TemplateData/bootstrap.bundle.min.js"></script> -->
   <script src="TemplateData/jquery-3.3.1.min.js"></script>
-  <script>
-    $(document).ready(function () {
-
-      const populateList = (function () {
-        $('#protocol')
-          .empty()
-        $.getJSON("api/simulator/get-protocols",
-          function (data) {
-            for (const val of data) {
-              $('#protocol').append($(document.createElement('option')).prop({
-                value: val,
-                text: val.charAt(0).toUpperCase() + val.slice(1)
-              }))
-            }
-          });
-      })
-
-
-      $('#refresh').click(function () {
-        populateList();
-      });
-
-      $('#btnset').click(function () {
-        const protocol = $('#protocol').val()
-        const url = "api/simulator/set-layout"
-        $.ajax(url, {
-          type: "POST",
-          contentType: "application/json; charset=utf-8",
-          data: JSON.stringify({ "name": protocol }),
-          success: function (result) {
-            // when call is sucessfull
-          },
-          error: function (err) {
-            // check the err for error details
-          }
-        }); // ajax call closing
-
-      });
-
-      $('#btn-error-gripping').click(function () {        
-        const url = "api/simulator/trigger-error/gripper"
-        $.ajax(url, {
-          type: "POST",
-          contentType: "application/json; charset=utf-8",          
-          success: function (result) {
-            // when call is sucessfull
-          },
-          error: function (err) {
-            // check the err for error details
-          }
-        }); // ajax call closing
-
-      });
-
-
-      populateList();
-
-    });
-
-  </script>
 </head>
 <header>
   <title>Menu</title>
