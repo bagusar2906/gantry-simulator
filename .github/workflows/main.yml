@@ -90,16 +90,16 @@ jobs:
             else
               next_version="v0.1.0" # Initial version
             fi
-            echo "::set-output name=version::$next_version"
+            echo "version=$next_version" >> $GITHUB_ENV
   
       - name: Extract Version from Tag or Calculated Version
         id: extract_version
         shell: bash
         run: |
-          if [[ ${{ github.ref_type }} == 'tag' ]]; then
-            echo "::set-output name=version::${GITHUB_REF#refs/tags/}"
+          if [[ "${{ github.ref_type }}" == 'tag' ]]; then
+            echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
           else
-            echo "::set-output name=version::${{ steps.determine_version.outputs.version }}"
+            echo "version=${{ steps.determine_version.outputs.version }}" >> $GITHUB_ENV
           fi
   
 
