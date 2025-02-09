@@ -90,7 +90,7 @@ jobs:
             else
               next_version="v0.1.0" # Initial version
             fi
-            echo "version=$next_version" >> $GITHUB_ENV
+            echo "version=$next_version" >> $GITHUB_OUTPUT
   
       - name: Extract Version from Tag or Calculated Version
         id: extract_version
