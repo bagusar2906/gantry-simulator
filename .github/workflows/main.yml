@@ -82,7 +82,7 @@ jobs:
             echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
           else
             # Extract version from Unity's ProjectSettings.asset
-            version=$(grep -oP 'version: \K.*' ProjectSettings.asset)
+            version=$(grep -oP 'version: \K.*' ProjectSettings/ProjectSettings.asset)
             echo "version=$version" >> $GITHUB_ENV
           fi
 
