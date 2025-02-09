@@ -74,17 +74,17 @@ jobs:
           lfs: true
           fetch-depth: 0
 
-      - name: Extract Version from Tag or Project Settings
-        id: extract_version
-        shell: bash
-        run: |
-          if [[ ${{ github.ref_type }} == 'tag' ]]; then
-            echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-          else
-            # Extract version from Unity's ProjectSettings.asset
-            version=$(grep -oP 'version: \K.*' ProjectSettings/ProjectSettings.asset)
-            echo "version=$version" >> $GITHUB_ENV
-          fi
+      # - name: Extract Version from Tag or Project Settings
+      #   id: extract_version
+      #   shell: bash
+      #   run: |
+      #     if [[ ${{ github.ref_type }} == 'tag' ]]; then
+      #       echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+      #     else
+      #       # Extract version from Unity's ProjectSettings.asset
+      #       version=$(grep -oP 'version: \K.*' ProjectSettings/ProjectSettings.asset)
+      #       echo "version=$version" >> $GITHUB_ENV
+      #     fi
 
       - name: Determine Next Version (if not tagged)
         id: determine_version
@@ -104,15 +104,15 @@ jobs:
             fi
             echo "version=$next_version" >> $GITHUB_OUTPUT
   
-      # - name: Extract Version from Tag or Calculated Version
-      #   id: extract_version
-      #   shell: bash
-      #   run: |
-      #     if [[ "${{ github.ref_type }}" == 'tag' ]]; then
-      #       echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-      #     else
-      #       echo "version=${{ steps.determine_version.outputs.version }}" >> $GITHUB_ENV
-      #     fi
+      - name: Extract Version from Tag or Calculated Version
+        id: extract_version
+        shell: bash
+        run: |
+          if [[ "${{ github.ref_type }}" == 'tag' ]]; then
+            echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+          else
+            echo "version=${{ steps.determine_version.outputs.version }}" >> $GITHUB_ENV
+          fi
   
 
       # Cache
