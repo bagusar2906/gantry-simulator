@@ -74,13 +74,25 @@ jobs:
           lfs: true
           fetch-depth: 0
 
+      - name: Extract Version from Tag or Project Settings
+        id: extract_version
+        shell: bash
+        run: |
+          if [[ ${{ github.ref_type }} == 'tag' ]]; then
+            echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+          else
+            # Extract version from Unity's ProjectSettings.asset
+            version=$(grep -oP 'version: \K.*' ProjectSettings.asset)
+            echo "version=$version" >> $GITHUB_ENV
+          fi
+
       - name: Determine Next Version (if not tagged)
         id: determine_version
         if: ${{ github.ref_type != 'tag' }}
         shell: bash
         run: |
             # 1. Get latest tag (if any)
-            latest_tag=$(git describe --tags --abbrev=0 2>/dev/null)
+            latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
             # 2. Increment version (example: patch version)
             if [[ -n "$latest_tag" ]]; then
               major=$(echo "$latest_tag" | grep -oE '^v([0-9]+)\.' | cut -d'.' -f1 | cut -c2-)
@@ -92,15 +104,15 @@ jobs:
             fi
             echo "version=$next_version" >> $GITHUB_OUTPUT
   
-      - name: Extract Version from Tag or Calculated Version
-        id: extract_version
-        shell: bash
-        run: |
-          if [[ "${{ github.ref_type }}" == 'tag' ]]; then
-            echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-          else
-            echo "version=${{ steps.determine_version.outputs.version }}" >> $GITHUB_ENV
-          fi
+      # - name: Extract Version from Tag or Calculated Version
+      #   id: extract_version
+      #   shell: bash
+      #   run: |
+      #     if [[ "${{ github.ref_type }}" == 'tag' ]]; then
+      #       echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+      #     else
+      #       echo "version=${{ steps.determine_version.outputs.version }}" >> $GITHUB_ENV
+      #     fi
   
 
       # Cache
