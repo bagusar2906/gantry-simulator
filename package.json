@@ -1,0 +1,26 @@
+{
+  "name": "gantry-simulator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bagusar2906/gantry-simulator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bagusar2906/gantry-simulator/issues"
+  },
+  "homepage": "https://github.com/bagusar2906/gantry-simulator#readme",
+  "description": "",
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.1",
+    "semantic-release": "^24.2.1"
+  }
+}
