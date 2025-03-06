@@ -6583,7 +6583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6510194479960153047, guid: 0415b69312406f34da36223822893765, type: 3}
       propertyPath: busId
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6615076457499753981, guid: 0415b69312406f34da36223822893765, type: 3}
       propertyPath: m_LocalScale.z
