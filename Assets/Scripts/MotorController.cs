@@ -120,7 +120,7 @@ public class MotorController : MonoBehaviour, IMotorSim
         // Check if we've touched the target
         
        //not immediate stop to simulate real movement
-       speed *= 0.3f;
+       speed *= 0.5f;
        const float overshoot = 1f;
        targetPosition = _currentPos + overshoot.ToNative(scale, offset);
 
@@ -143,7 +143,7 @@ public class MotorController : MonoBehaviour, IMotorSim
         if (moveState != MotorState.Fixed) return;
       
         targetPosition = Mathf.Clamp(((float)destination).ToNative(scale,  offset) , 0f, maxTravelLimit);
-        speed = (float)(0.015 * velocity);
+        speed = (float)(0.01 * velocity);
         _busId = busId;
         _motorId = motorId;
         _isHoming = false;
