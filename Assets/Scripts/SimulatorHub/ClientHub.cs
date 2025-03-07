@@ -126,7 +126,8 @@ namespace SimulatorHub
                         busId = pulseStation.busId,
                         stationId = pulseStation.stationId,
                         motorId = args.MotorID,
-                        errorCode = args.MotorErrorCode
+                        errorCode = args.MotorErrorCode,
+                        position = args.Position
                     };
                     var json = JsonUtility.ToJson(dto);
                     _signalR.Invoke(EventHandlers.MotorErrorOccured, json);

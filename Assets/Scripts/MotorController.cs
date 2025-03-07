@@ -53,7 +53,7 @@ public class MotorController : MonoBehaviour, IMotorSim
             moveState = MotorState.Fixed;
             MotorErrorOccured?.Invoke(this, new MotorErrorOccuredEventArgs()
             {
-                BustId = _busId,
+                BusId = _busId,
                 MotorID = _motorId,
                 Position = CurrentPos,
                 MotorErrorCode = (ushort)MotorErrorEnum.MotionAbort
@@ -61,7 +61,7 @@ public class MotorController : MonoBehaviour, IMotorSim
             Debug.Log($"Motor stop due to collision, pos: {CurrentPos}");
         }
         
-        if (target >= targetPosition && moveState == MotorState.MovingUp )
+        if (target >= targetPosition && moveState == MotorState.MovingUp && !_isMotionAbortTriggered)
         {
             moveState = MotorState.Fixed;
             MotorMoveDone?.Invoke(this, new MotorMoveDoneEventArgs()
@@ -120,7 +120,7 @@ public class MotorController : MonoBehaviour, IMotorSim
         // Check if we've touched the target
         
        //not immediate stop to simulate real movement
-       speed *= 0.2f;
+       speed *= 0.3f;
        const float overshoot = 1f;
        targetPosition = _currentPos + overshoot.ToNative(scale, offset);
 
